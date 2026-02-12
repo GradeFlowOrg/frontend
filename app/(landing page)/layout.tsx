@@ -15,7 +15,7 @@ export default function LandingPageLayout({children}: {children: React.ReactNode
                 glowAmount={0.002}
                 pillarWidth={7}
                 pillarHeight={0.4}
-                noiseIntensity={0}
+                noiseIntensity={0.5}
                 pillarRotation={20}
                 interactive={false}
                 mixBlendMode="screen"
