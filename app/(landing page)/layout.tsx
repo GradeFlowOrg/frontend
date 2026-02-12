@@ -12,7 +12,7 @@ export default function LandingPageLayout({children}: {children: React.ReactNode
                 bottomColor="#FF9FFC"
                 intensity={1}
                 rotationSpeed={0.4}
-                glowAmount={0.002}
+                glowAmount={0.0002}
                 pillarWidth={7}
                 pillarHeight={0.4}
                 noiseIntensity={0.5}
