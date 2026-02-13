@@ -10,11 +10,11 @@ export default function LandingPageLayout({children}: {children: React.ReactNode
                 className="pointer-events-none"
                 topColor="#5227FF"
                 bottomColor="#FF9FFC"
-                intensity={8}
+                intensity={5}
                 rotationSpeed={0.4}
                 glowAmount={0.0002}
                 pillarWidth={7}
-                pillarHeight={0.7}
+                pillarHeight={0.3}
                 noiseIntensity={0}
                 pillarRotation={20}
                 interactive={false}
