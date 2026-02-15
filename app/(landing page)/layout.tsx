@@ -8,9 +8,9 @@ export default function LandingPageLayout({children}: {children: React.ReactNode
             {children}
             <LightPillar
                 className="pointer-events-none"
-                topColor="rgba(30, 58, 138, 0.35)"
-                bottomColor="rgba(37, 99, 235, 0.15)"
-                intensity={5}
+                topColor="rgba(255, 255, 255, 0.25)"
+                bottomColor="rgba(255, 255, 255, 0.08)"
+                intensity={3}
                 rotationSpeed={0.4}
                 glowAmount={0.0002}
                 pillarWidth={7}
