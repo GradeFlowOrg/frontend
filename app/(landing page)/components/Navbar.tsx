@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function Navbar() {
   return (
-    <nav className="text-white p-4 bg-[#000000b1] backdrop-blur-[12px] fixed w-full z-10 border border-[rgba(0,0,0,0.05)]">
+    <nav className="text-white p-4 bg-[#000] backdrop-blur-[12px] fixed w-full z-10 border border-[rgba(0,0,0,0.05)]">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <Link href="/" className='flex items-center gap-1 '>
@@ -15,8 +15,8 @@ export default function Navbar() {
           </Link>
           <div className="flex items-center gap-6">
             <ul className='hidden gap-6 min-[620px]:flex'>
-              <li className='cursor-pointer text-[14px] font-medium text-[#c2c1c1] hover:text-white transition-all duration-200'>Features</li>
-              <li className='cursor-pointer text-[14px] font-medium text-[#c2c1c1] hover:text-white transition-all duration-200'>How it works</li>
+              <li className='cursor-pointer text-[15px] font-medium text-[#7E7E7E] hover:text-white transition-all duration-200'>Features</li>
+              <li className='cursor-pointer text-[15px] font-medium text-[#7E7E7E] hover:text-white transition-all duration-200'>How it works</li>
             </ul>
             <button></button>
             <div className='flex gap-2 min-[390px]:gap-6'>
