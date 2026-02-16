@@ -6,12 +6,12 @@ import Link from 'next/link'
 
 export default function Navbar() {
   return (
-    <nav className="text-white p-4 bg-[#000] backdrop-blur-[12px] fixed w-full z-10 border border-[rgba(0,0,0,0.05)]">
+    <nav className="text-white p-4 bg-[#000]  w-full fixed top-0 left-0 z-50">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <Link href="/" className='flex items-center gap-1 '>
             <Image src={Logo} alt="GradeFlow Logo" width={32} height={32} className="inline-block" />
-            <h1 className="font-[var(--font-inter)] text-[#fff] text-[20px] font-bold max-[390px]:text-[15px]">GradeFlow</h1>
+            <h1 className="font-[var(--font-inter)] text-[#fff] text-[20px] font-bold max-[390px]:text-[15px] max-[338px]:hidden">GradeFlow</h1>
           </Link>
           <div className="flex items-center gap-6">
             <ul className='hidden gap-6 min-[620px]:flex'>
