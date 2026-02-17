@@ -1,26 +1,28 @@
-import Navbar from "./components/Navbar";
-import LightPillar from "@/components/LightPillar";
+"use client"
 
-export default function LandingPageLayout({children}: {children: React.ReactNode}) {
+import Navbar from "./components/Navbar";
+import { useState, useEffect } from "react";
+import FirstPage from '@/app/(landing page)/page'
+
+export default function LandingPageLayout({ children }: { children: React.ReactNode }) {
+    const [size, setSize] = useState(0);
+
+    useEffect(() => {
+        const update = () =>
+            setSize(window.innerWidth);
+
+        update();
+        window.addEventListener("resize", update);
+        return () => window.removeEventListener("resize", update);
+    }, []);
+
     return (
         <>
             <Navbar />
-            {children}
-            <LightPillar
-                className="pointer-events-none"
-                topColor="rgba(255, 255, 255, 0.25)"
-                bottomColor="rgba(255, 255, 255, 0.08)"
-                intensity={3}
-                rotationSpeed={0.4}
-                glowAmount={0.0002}
-                pillarWidth={7}
-                pillarHeight={0.3}
-                noiseIntensity={0}
-                pillarRotation={20}
-                interactive={false}
-                mixBlendMode="screen"
-                quality="high"
-            />
+            {size > 620 ?
+                children :
+                <FirstPage/>
+            }
         </>
     );
 }
