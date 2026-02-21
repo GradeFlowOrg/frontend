@@ -16,3 +16,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter);
 }
+
+::selection {
+  background-color: #1e3a8a;
+  color: #fff;
+}

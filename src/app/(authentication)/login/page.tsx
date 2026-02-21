@@ -1,10 +1,5 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
+import AuthFormUI from "../_components/LoginUI";
 
-
-
-export default function login() {
-  return (
-    <div>login</div>
-  )
+export default function LoginPage() {
+  return <AuthFormUI mode="login" />;
 }

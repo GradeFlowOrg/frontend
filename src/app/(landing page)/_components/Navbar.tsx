@@ -4,7 +4,7 @@ import LogoBlack from '@/public/images/logo-black.png'
 import LogoWhite from '@/public/images/logo-white.png'
 import Image from 'next/image'
 import Link from 'next/link'
-import ThemeSwitch from '@/app/components/ThemeSwitch'
+import ThemeSwitch from '@/components/ThemeSwitch'
 
 export default function Navbar() {
   const scrollToFeatures = () => {

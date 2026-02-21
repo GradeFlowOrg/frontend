@@ -1,7 +1,5 @@
-import React from 'react'
+import AuthFormUI from "../_components/LoginUI";
 
-export default function signup() {
-  return (
-    <div>signup</div>
-  )
+export default function SignupPage() {
+  return <h1>Sign up</h1>;
 }

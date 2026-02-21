@@ -1,5 +1,5 @@
 import React from 'react'
-import LiquidCard from '../../components/ui/LiquidCard';
+import LiquidCard from '../../../components/ui/LiquidCard';
 import { ChartNoAxesCombined, Share2, ShieldCheck } from 'lucide-react';
 
 export default function howItWorks() {
