@@ -1,5 +1,4 @@
-export type FormFields = {
-  name: string;
+export type LoginFormField = {
+  identifier: string;
   password: string;
-  email: string;
 };
