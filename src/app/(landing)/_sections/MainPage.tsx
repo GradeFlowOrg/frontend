@@ -1,6 +1,6 @@
 import React from 'react'
 
-function mainPage() {
+function MainPage() {
     return (
         <section className="w-full my-[20px] min-h-[60vh] flex flex-col items-center justify-center" id='feature'>
             <div className="container mx-auto">
@@ -17,4 +17,4 @@ function mainPage() {
     )
 }
 
-export default mainPage
+export default MainPage

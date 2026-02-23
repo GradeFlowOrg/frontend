@@ -2,7 +2,7 @@ import React from 'react'
 import LiquidCard from '../../../components/ui/LiquidCard';
 import { ChartNoAxesCombined, Share2, ShieldCheck } from 'lucide-react';
 
-export default function howItWorks() {
+export default function HowItWorks() {
   return (
     <section id="how-it-works" className="w-full my-[20px] scroll-mt-24">
       <div className="container mx-auto flex flex-col items-center">

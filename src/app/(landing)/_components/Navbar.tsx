@@ -50,7 +50,7 @@ export default function Navbar() {
             </div>
             <span className="text-[#000] dark:text-white max-[774px]:hidden">|</span>
             <div className='flex gap-2 min-[390px]:gap-6'>
-              <Link href={'/login'} className="bg-[#0046FF] w-[90px] h-[40px] flex items-center justify-center font-medium text-white font-bold py-2 px-4 rounded-[10px] border border-[#0046FF] cursor-pointer max-[390px]:text-[12px] tracking-normal text-[white] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:bg-white hover:text-[#0046FF] text-[14px]">Login</Link>
+              <Link href={'/login'} className="bg-[transparent] flex items-center justify-center font-medium font-bold cursor-pointer max-[390px]:text-[12px] tracking-normal text-[#0046FF] hover:opacity-75 transition-all duration-300 text-[14px] hover:opacity-75 transition-all duration-300">Login</Link>
               <Link href={'/signup'} className="bg-[#0046FF] w-[90px] h-[40px] flex items-center justify-center font-medium text-white font-bold py-2 px-4 rounded-[10px] border border-[#0046FF] cursor-pointer max-[390px]:text-[12px] tracking-normal text-[white] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:bg-white hover:text-[#0046FF] text-[14px]">Sign up</Link>
             </div>
           </div>
