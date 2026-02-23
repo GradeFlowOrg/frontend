@@ -301,7 +301,7 @@ export default function SignupPage() {
           </div>
         </form>
 
-        {step === 1 && (<p className="mt-5 text-center text-sm text-[#355181] dark:text-slate-300">
+        {step === 0 && (<p className="mt-5 text-center text-sm text-[#355181] dark:text-slate-300">
           Already have an account?{" "}
           <Link href="/login" className="font-semibold text-[#0046FF]">
             Login
