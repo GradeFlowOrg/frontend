@@ -4,19 +4,23 @@ import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { Eye, EyeOff } from "lucide-react";
-import React, { useActionState } from "react";
+import React, { startTransition, useActionState } from "react";
 import { loginSchema, LoginFormField } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { login } from "../lib/actions";
+import { login, type LoginActionState } from "../lib/actions";
 
 export default function LoginPage() {
-  const [state, loginAction] = useActionState(login, undefined);
+  const [state, loginAction, isActionPending] = useActionState<LoginActionState, FormData>(
+    login,
+    { error: null, success: false }
+  );
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormField>({
     resolver: zodResolver(loginSchema),
@@ -26,16 +30,23 @@ export default function LoginPage() {
     },
   });
 
-  // const onSubmit: SubmitHandler<LoginFormField> = async (data) => {
-  //   try {
-  //     await new Promise((resolve) => setTimeout(resolve, 1000));
-  //     console.log(data);
-  //   } catch {
-  //     setError("root", {
-  //       message: "Invalid username/email or password.",
-  //     });
-  //   }
-  // };
+  React.useEffect(() => {
+    if (state.error) {
+      setError("root", { message: state.error });
+    } else if (state.success) {
+      clearErrors("root");
+    }
+  }, [state, setError, clearErrors]);
+
+  const onSubmit: SubmitHandler<LoginFormField> = async (data) => {
+    clearErrors("root");
+    const formData = new FormData();
+    formData.set("identifier", data.identifier);
+    formData.set("password", data.password);
+    startTransition(() => {
+      loginAction(formData);
+    });
+  };
 
   return (
     <section className="w-full px-4">
@@ -51,7 +62,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <form className="space-y-4" /* onSubmit={handleSubmit(onSubmit)} */ noValidate action={loginAction}>
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
 
           <div>
             <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">Login</label>
@@ -99,15 +110,20 @@ export default function LoginPage() {
                 {errors.root.message}
               </p>
             )}
+            {state.success && (
+              <p className="mt-1 text-xs text-green-600 dark:text-green-400">
+                Login successful (demo state).
+              </p>
+            )}
           </div>
 
 
           <Button
             type="submit"
             className="w-full"
-            disabled={isSubmitting}
+            disabled={isSubmitting || isActionPending}
           >
-            {isSubmitting ? "Logging in..." : "Login"}
+            {isSubmitting || isActionPending ? "Logging in..." : "Login"}
           </Button>
         </form>
 
