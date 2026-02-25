@@ -4,12 +4,14 @@ import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { Eye, EyeOff } from "lucide-react";
-import React from "react";
+import React, { useActionState } from "react";
 import { loginSchema, LoginFormField } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { login } from "../lib/actions";
 
 export default function LoginPage() {
+  const [state, loginAction] = useActionState(login, undefined);
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     register,
@@ -24,17 +26,16 @@ export default function LoginPage() {
     },
   });
 
-  const onSubmit: SubmitHandler<LoginFormField> = async (data) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      throw new Error("Invalid credentials");
-      console.log(data);
-    } catch (error) {
-      setError("root", {
-        message: "Invalid username/email or password.",
-      });
-    }
-  };
+  // const onSubmit: SubmitHandler<LoginFormField> = async (data) => {
+  //   try {
+  //     await new Promise((resolve) => setTimeout(resolve, 1000));
+  //     console.log(data);
+  //   } catch {
+  //     setError("root", {
+  //       message: "Invalid username/email or password.",
+  //     });
+  //   }
+  // };
 
   return (
     <section className="w-full px-4">
@@ -50,7 +51,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className="space-y-4" /* onSubmit={handleSubmit(onSubmit)} */ noValidate action={loginAction}>
 
           <div>
             <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">Login</label>
