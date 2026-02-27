@@ -4,23 +4,17 @@ import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { Eye, EyeOff } from "lucide-react";
-import React, { startTransition, useActionState } from "react";
+import React from "react";
 import { loginSchema, LoginFormField } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { login, type LoginActionState } from "../lib/actions";
 
 export default function LoginPage() {
-  const [state, loginAction, isActionPending] = useActionState<LoginActionState, FormData>(
-    login,
-    { error: null, success: false }
-  );
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     register,
     handleSubmit,
     setError,
-    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormField>({
     resolver: zodResolver(loginSchema),
@@ -30,22 +24,16 @@ export default function LoginPage() {
     },
   });
 
-  React.useEffect(() => {
-    if (state.error) {
-      setError("root", { message: state.error });
-    } else if (state.success) {
-      clearErrors("root");
-    }
-  }, [state, setError, clearErrors]);
-
   const onSubmit: SubmitHandler<LoginFormField> = async (data) => {
-    clearErrors("root");
-    const formData = new FormData();
-    formData.set("identifier", data.identifier);
-    formData.set("password", data.password);
-    startTransition(() => {
-      loginAction(formData);
-    });
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      throw new Error("Invalid credentials");
+      console.log(data);
+    } catch (error) {
+      setError("root", {
+        message: "Invalid username/email or password.",
+      });
+    }
   };
 
   return (
@@ -110,20 +98,15 @@ export default function LoginPage() {
                 {errors.root.message}
               </p>
             )}
-            {state.success && (
-              <p className="mt-1 text-xs text-green-600 dark:text-green-400">
-                Login successful (demo state).
-              </p>
-            )}
           </div>
 
 
           <Button
             type="submit"
             className="w-full"
-            disabled={isSubmitting || isActionPending}
+            disabled={isSubmitting}
           >
-            {isSubmitting || isActionPending ? "Logging in..." : "Login"}
+            {isSubmitting ? "Logging in..." : "Login"}
           </Button>
         </form>
 

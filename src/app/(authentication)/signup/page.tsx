@@ -285,12 +285,10 @@ export default function SignupPage() {
             <Button
               type="button"
               onClick={prevStep}
-              disabled={step === 0 ? true : false}
-              className={`mt-0 w-full border border-[#c7d8ff] bg-white text-[#0F2854] hover:bg-[#eef4ff] hover:text-[#0046FF] dark:border-white/15 dark:bg-[#0b1220] dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white sm:w-auto sm:min-w-28 `}
+              className={`mt-0 w-full border !border-[#c7d8ff] !bg-white !text-[#0F2854] hover:!bg-[#eef4ff] hover:!text-[#0046FF] dark:!border-white/15 dark:!bg-[#0b1220] dark:!text-slate-200 dark:hover:!bg-white/10 dark:hover:!text-white sm:w-auto sm:min-w-28 ${step === 0 ? "invisible" : ""}`}
             >
               Back
             </Button>
-
 
             {step < 2 ? (
               <Button type="button" onClick={nextStep} className="w-full sm:w-auto sm:min-w-32">
