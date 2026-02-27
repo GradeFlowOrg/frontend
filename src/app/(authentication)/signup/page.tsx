@@ -280,6 +280,7 @@ export default function SignupPage() {
             </>
           )}
 
+
           <div className="flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-between">
             <Button
               type="button"
