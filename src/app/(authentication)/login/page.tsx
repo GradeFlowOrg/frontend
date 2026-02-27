@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import React, { startTransition, useActionState } from "react";
 import { loginSchema, LoginFormField } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,8 +25,8 @@ export default function LoginPage() {
   } = useForm<LoginFormField>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      identifier: "",
-      password: "",
+      identifier: "abdulazizyusupaliev009@gmail.com",
+      password: "123456",
     },
   });
 
@@ -120,10 +120,10 @@ export default function LoginPage() {
 
           <Button
             type="submit"
-            className="w-full"
+            className="w-full flex items-center justify-center"
             disabled={isSubmitting || isActionPending}
           >
-            {isSubmitting || isActionPending ? "Logging in..." : "Login"}
+            {isSubmitting || isActionPending ? <LoaderCircle className="h-5 w-5 animate-spin" /> : "Login"}
           </Button>
         </form>
 
