@@ -191,7 +191,7 @@ export default function SignupPage() {
                   Enter the 6-digit code sent to <span className="font-medium">{watch("email") || "your email"}</span>.
                   Demo code: <span className="font-semibold text-[#0046FF]">{DEMO_VERIFICATION_CODE}</span>
                 </p>
-                <div className="w-full flex-center">
+                <div className="flex w-full justify-center">
                   <Controller
                     control={control}
                     name="verificationCode"
@@ -205,7 +205,7 @@ export default function SignupPage() {
                         }}
                         containerClassName="w-full"
                       >
-                        <InputOTPGroup className="justify-center sm:justify-start">
+                        <InputOTPGroup className="justify-center">
                           <InputOTPSlot index={0} />
                           <InputOTPSlot index={1} />
                           <InputOTPSlot index={2} />
