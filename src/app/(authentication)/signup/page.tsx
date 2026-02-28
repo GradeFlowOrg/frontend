@@ -7,7 +7,13 @@ import { Eye, EyeOff } from "lucide-react";
 import { SignupFormField, signupSchema } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useMemo, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/InputOTP";
+
 
 const stepFields: Array<Array<keyof SignupFormField>> = [
   ["role", "fullName", "email"],
@@ -22,6 +28,7 @@ export default function SignupPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
+    control,
     register,
     handleSubmit,
     trigger,
@@ -152,7 +159,7 @@ export default function SignupPage() {
                   {...register("fullName")}
                   type="text"
                   placeholder="Enter your full name"
-                  className={`w-full ${errors.fullName ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
+                  className={`w-full ${errors.fullName ? "border-red-500 focus:border-red-500 dark:border-red-400" : ""}`}
                 />
                 {errors.fullName && (
                   <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.fullName.message}</p>
@@ -165,7 +172,7 @@ export default function SignupPage() {
                   {...register("email")}
                   type="email"
                   placeholder="Enter your email"
-                  className={`w-full ${errors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
+                  className={`w-full ${errors.email ? "border-red-500 focus:border-red-500 dark:border-red-400" : ""}`}
                 />
                 {errors.email && (
                   <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.email.message}</p>
@@ -184,14 +191,32 @@ export default function SignupPage() {
                   Enter the 6-digit code sent to <span className="font-medium">{watch("email") || "your email"}</span>.
                   Demo code: <span className="font-semibold text-[#0046FF]">{DEMO_VERIFICATION_CODE}</span>
                 </p>
-                <Input
-                  {...register("verificationCode")}
-                  type="text"
-                  placeholder="Enter 6-digit code"
-                  inputMode="numeric"
-                  maxLength={6}
-                  className={`w-full tracking-[0.25em] text-center ${errors.verificationCode ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
-                />
+                <div className="w-full flex-center">
+                  <Controller
+                    control={control}
+                    name="verificationCode"
+                    render={({ field }) => (
+                      <InputOTP
+                        maxLength={6}
+                        value={field.value ?? ""}
+                        onChange={(value) => {
+                          field.onChange(value);
+                          if (errors.verificationCode) clearErrors("verificationCode");
+                        }}
+                        containerClassName="w-full"
+                      >
+                        <InputOTPGroup className="justify-center sm:justify-start">
+                          <InputOTPSlot index={0} />
+                          <InputOTPSlot index={1} />
+                          <InputOTPSlot index={2} />
+                          <InputOTPSlot index={3} />
+                          <InputOTPSlot index={4} />
+                          <InputOTPSlot index={5} />
+                        </InputOTPGroup>
+                      </InputOTP>
+                    )}
+                  />
+                </div>
                 {errors.verificationCode && (
                   <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.verificationCode.message}</p>
                 )}
@@ -207,7 +232,7 @@ export default function SignupPage() {
                   {...register("username")}
                   type="text"
                   placeholder="@"
-                  className={`w-full ${errors.username ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
+                  className={`w-full ${errors.username ? "border-red-500 focus:border-red-500 dark:border-red-400" : ""}`}
                 />
                 {errors.username && (
                   <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.username.message}</p>
@@ -221,12 +246,12 @@ export default function SignupPage() {
                     {...register("password")}
                     type={showPassword ? "text" : "password"}
                     placeholder="Create a password"
-                    className={`w-full pr-11 ${errors.password ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
+                    className={`w-full pr-11 ${errors.password ? "border-red-500 focus:border-red-500 dark:border-red-400" : ""}`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword((prev) => !prev)}
-                    className="absolute inset-y-1 right-1 inline-flex w-8 items-center justify-center rounded-md text-[#355181] transition hover:bg-slate-100 hover:text-[#0046FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0046FF]/40 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
+                    className="absolute inset-y-1 right-1 inline-flex w-8 cursor-pointer items-center justify-center rounded-md text-[#355181] transition hover:bg-slate-100 hover:text-[#0046FF] focus-visible:outline-none dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -244,12 +269,12 @@ export default function SignupPage() {
                     {...register("confirmPassword")}
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Re-enter your password"
-                    className={`w-full pr-11 ${errors.confirmPassword ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
+                    className={`w-full pr-11 ${errors.confirmPassword ? "border-red-500 focus:border-red-500 dark:border-red-400" : ""}`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword((prev) => !prev)}
-                    className="absolute inset-y-1 right-1 inline-flex w-8 items-center justify-center rounded-md text-[#355181] transition hover:bg-slate-100 hover:text-[#0046FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0046FF]/40 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
+                    className="absolute inset-y-1 right-1 inline-flex w-8 cursor-pointer items-center justify-center rounded-md text-[#355181] transition hover:bg-slate-100 hover:text-[#0046FF] focus-visible:outline-none dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                     aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
                   >
                     {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
