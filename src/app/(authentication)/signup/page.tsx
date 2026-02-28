@@ -221,12 +221,12 @@ export default function SignupPage() {
                     {...register("password")}
                     type={showPassword ? "text" : "password"}
                     placeholder="Create a password"
-                    className={`w-full pr-10 ${errors.password ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
+                    className={`w-full pr-11 ${errors.password ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword((prev) => !prev)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-[#355181] hover:text-[#0046FF] dark:text-slate-300 dark:hover:text-white"
+                    className="absolute inset-y-1 right-1 inline-flex w-8 items-center justify-center rounded-md text-[#355181] transition hover:bg-slate-100 hover:text-[#0046FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0046FF]/40 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -244,12 +244,12 @@ export default function SignupPage() {
                     {...register("confirmPassword")}
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Re-enter your password"
-                    className={`w-full pr-10 ${errors.confirmPassword ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
+                    className={`w-full pr-11 ${errors.confirmPassword ? "border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400" : ""}`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword((prev) => !prev)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-[#355181] hover:text-[#0046FF] dark:text-slate-300 dark:hover:text-white"
+                    className="absolute inset-y-1 right-1 inline-flex w-8 items-center justify-center rounded-md text-[#355181] transition hover:bg-slate-100 hover:text-[#0046FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0046FF]/40 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                     aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
                   >
                     {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
