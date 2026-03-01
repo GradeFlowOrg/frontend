@@ -191,21 +191,22 @@ export default function SignupPage() {
                   Enter the 6-digit code sent to <span className="font-medium">{watch("email") || "your email"}</span>.
                   Demo code: <span className="font-semibold text-[#0046FF]">{DEMO_VERIFICATION_CODE}</span>
                 </p>
-                <div className="w-full flex-center">
+                <div className="flex w-full justify-center">
                   <Controller
                     control={control}
                     name="verificationCode"
                     render={({ field }) => (
                       <InputOTP
                         maxLength={6}
+                        autoFocus={step === 1}
                         value={field.value ?? ""}
                         onChange={(value) => {
                           field.onChange(value);
                           if (errors.verificationCode) clearErrors("verificationCode");
                         }}
-                        containerClassName="w-full"
+                        containerClassName="w-full justify-center"
                       >
-                        <InputOTPGroup className="justify-center sm:justify-start">
+                        <InputOTPGroup className="justify-center">
                           <InputOTPSlot index={0} />
                           <InputOTPSlot index={1} />
                           <InputOTPSlot index={2} />
@@ -305,15 +306,16 @@ export default function SignupPage() {
             </>
           )}
 
-
           <div className="flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-between">
             <Button
               type="button"
               onClick={prevStep}
-              className={`mt-0 w-full border !border-[#c7d8ff] !bg-white !text-[#0F2854] hover:!bg-[#eef4ff] hover:!text-[#0046FF] dark:!border-white/15 dark:!bg-[#0b1220] dark:!text-slate-200 dark:hover:!bg-white/10 dark:hover:!text-white sm:w-auto sm:min-w-28 ${step === 0 ? "invisible" : ""}`}
+              disabled={step === 0 ? true : false}
+              className={`mt-0 w-full border border-[#c7d8ff] bg-white text-[#0F2854] hover:bg-[#eef4ff] hover:text-[#0046FF] dark:border-white/15 dark:bg-[#0b1220] dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white sm:w-auto sm:min-w-28 `}
             >
               Back
             </Button>
+
 
             {step < 2 ? (
               <Button type="button" onClick={nextStep} className="w-full sm:w-auto sm:min-w-32">
