@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState, useSyncExternalStore, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent, type ReactNode } from "react";
 // import { logout } from '@/app/(authentication)/lib/actions'
 import {
   BookOpenCheck,
@@ -29,10 +29,10 @@ type NavItem = {
 const COLLAPSED_BUTTON_SIZE = "h-11 w-11 min-h-11 min-w-11 shrink-0 aspect-square";
 const SIDEBAR_BUTTON_PADDING = "p-2.5";
 
-function NavIcon({ icon: Icon }: { icon: LucideIcon }) {
+function NavIcon({ icon: Icon, color }: { icon: LucideIcon, color?:string }) {
   return (
     <span className="flex h-6 w-6 items-center justify-center">
-      <Icon className="h-6 w-6 shrink-0" strokeWidth={2} absoluteStrokeWidth />
+      <Icon color={color} className="h-6 w-6 shrink-0" strokeWidth={2} absoluteStrokeWidth />
     </span>
   );
 }
@@ -60,17 +60,14 @@ function SidebarTooltip({
 
 const topItems: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: House },
-  { href: "/roadmaps", label: "Roadmaps", icon: Waypoints },
-  { href: "/competitions", label: "Competitions", icon: Trophy },
-  { href: "/vocabulary", label: "Vocabulary", icon: BookOpenCheck },
+  { href: "/classes", label: "Classes", icon: BookOpenCheck },
+  { href: "/school", label: "School", icon: Waypoints },
+  { href: "/notifications", label: "Notifications", icon: Trophy },
 ];
 
 const assessmentItems = [
-  { href: "/assessments/placements", label: "Placements", count: 8 },
-  { href: "/assessments/level-checks", label: "Level Checks", count: 5 },
-  { href: "/assessments/homework", label: "Homework", count: 0 },
-  { href: "/assessments/exams", label: "Exams", count: 1 },
-  { href: "/assessments/last-dances", label: "Last Dances", count: 8 },
+  { href: "/assignments/homework", label: "Homework", count: 0 },
+  { href: "/assignments/exams", label: "Exams", count: 1 },
 ];
 
 const bottomItems: NavItem[] = [
@@ -82,7 +79,7 @@ const mobilePrimary: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: House },
   { href: "/roadmaps", label: "Roadmaps", icon: Waypoints },
   { href: "/competitions", label: "Competitions", icon: Trophy },
-  { href: "/assessments", label: "Assessments", icon: NotebookPen },
+  { href: "/assignments", label: "Assignments", icon: NotebookPen },
 ];
 const mobileExtra = [...topItems.slice(4), ...bottomItems];
 
@@ -145,7 +142,7 @@ function MobileLink({
       }`}
     >
       <NavIcon icon={Icon} />
-      <span className="truncate text-[11px] font-semibold">{item.label}</span>
+      <span className="truncate text-[11px] font-semibold max-[430px]:hidden">{item.label}</span>
     </Link>
   );
 }
@@ -161,20 +158,60 @@ export default function SideBar() {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("gf-sidebar-collapsed") === "1";
   });
-  const [assessmentsOpen, setAssessmentsOpen] = useState(false);
-  const [mobileExpanded, setMobileExpanded] = useState(false);
-  const assessmentsActive = pathname.startsWith("/assessments");
+  const [assignmentsOpen, setassignmentsOpen] = useState(false);
+  const [mobileAssignmentsOpen, setMobileAssignmentsOpen] = useState(false);
+  const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
+  const assignmentsMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const assignmentsActive = pathname.startsWith("/assignments");
 
   useEffect(() => {
     localStorage.setItem("gf-sidebar-collapsed", collapsed ? "1" : "0");
   }, [collapsed]);
 
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node | null;
+      if (!target) return;
+
+      if (assignmentsOpen) {
+        const assignmentsMenu = assignmentsMenuRef.current;
+        if (assignmentsMenu && !assignmentsMenu.contains(target)) {
+          setassignmentsOpen(false);
+        }
+      }
+
+      if (mobileAssignmentsOpen || mobileMoreOpen) {
+        const mobileMenu = mobileMenuRef.current;
+        if (mobileMenu && !mobileMenu.contains(target)) {
+          setMobileAssignmentsOpen(false);
+          setMobileMoreOpen(false);
+        }
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (assignmentsOpen) setassignmentsOpen(false);
+      if (mobileAssignmentsOpen) setMobileAssignmentsOpen(false);
+      if (mobileMoreOpen) setMobileMoreOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown, true);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown, true);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [assignmentsOpen, mobileAssignmentsOpen, mobileMoreOpen]);
+
   const desktopWidth = useMemo(() => (collapsed ? "w-[96px]" : "w-[300px]"), [collapsed]);
 
-  const handleCollapsedAssessmentsClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleCollapsedassignmentsClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setCollapsed(false);
-    setAssessmentsOpen(true);
+    setassignmentsOpen(true);
   };
 
   if (!mounted) {
@@ -184,12 +221,12 @@ export default function SideBar() {
   return (
     <>
       <aside className={`hidden md:flex ${desktopWidth} shrink-0 p-4 transition-[width] duration-300`}>
-        <div className="relative flex h-[calc(100vh-2rem)] w-full flex-col overflow-visible rounded-[28px] border border-slate-300 bg-gradient-to-b from-white to-slate-100 p-3 text-slate-900 shadow-sm dark:border-[#1e2a49] dark:bg-gradient-to-b dark:from-[#0f1b36] dark:to-[#080d18] dark:text-white dark:shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+        <div className="relative flex h-[calc(100vh-2rem)] w-full flex-col overflow-visible rounded-[28px] border border-black/10 bg-white p-3 text-slate-900 shadow-sm dark:border-[#3a3a3a] dark:bg-[#1a1a1a] dark:text-white dark:shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
           <div className={`mb-4 ${collapsed ? "flex justify-center" : "flex items-start justify-between"}`}>
             {!collapsed ? (
-              <div className="min-w-0">
+              <div className="min-w-0 pl-[10px]">
                 <p className="truncate font-[var(--font-montserrat)] text-2xl font-semibold leading-none">GradeFlow</p>
-                <p className="mt-1 text-xs text-slate-500 dark:text-white/55">College Prep Community</p>
+                <p className="truncate mt-1 text-xs text-slate-500 dark:text-white/55">College Prep Community</p>
               </div>
             ) : null}
             <button
@@ -204,7 +241,9 @@ export default function SideBar() {
 
           <div
             className={`flex-1 pr-1 ${
-              collapsed ? "overflow-visible" : "sidebar-scroll overflow-y-auto"
+              collapsed
+                ? "overflow-visible"
+                : "sidebar-scroll overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             }`}
           >
             <nav className={collapsed ? "mx-auto flex w-full flex-col items-center gap-2" : "space-y-2"}>
@@ -213,16 +252,16 @@ export default function SideBar() {
               ))}
 
               {collapsed ? (
-                <SidebarTooltip label="Assessments" collapsed={collapsed}>
+                <SidebarTooltip label="assignments" collapsed={collapsed}>
                   <button
                     type="button"
-                    onClick={handleCollapsedAssessmentsClick}
+                    onClick={handleCollapsedassignmentsClick}
                     className={`group flex cursor-pointer items-center justify-center rounded-2xl border transition-all duration-200 ${
                       collapsed
                         ? `mx-auto ${COLLAPSED_BUTTON_SIZE} ${SIDEBAR_BUTTON_PADDING} overflow-visible`
                         : `w-full ${SIDEBAR_BUTTON_PADDING}`
                     } ${
-                      assessmentsActive
+                      assignmentsActive
                         ? "border-[#2d63ff] bg-[#0046FF] text-white"
                         : "border-transparent text-slate-700 hover:border-slate-300 hover:bg-slate-100 dark:text-white/80 dark:hover:border-white/10 dark:hover:bg-white/8 dark:hover:text-white"
                     }`}
@@ -231,21 +270,26 @@ export default function SideBar() {
                   </button>
                 </SidebarTooltip>
               ) : (
-                <div className="rounded-2xl border border-slate-300/80 bg-white/80 dark:border-white/8 dark:bg-white/3">
+                <div
+                  ref={assignmentsMenuRef}
+                  className="rounded-2xl border border-slate-300/80 bg-white/80 dark:border-white/8 dark:bg-white/3"
+                >
                   <button
                     type="button"
-                    onClick={() => setAssessmentsOpen((prev) => !prev)}
+                    onClick={() => setassignmentsOpen((prev) => !prev)}
+                    aria-expanded={assignmentsOpen}
+                    aria-controls="sidebar-assignments-panel"
                     className={`flex w-full cursor-pointer items-center rounded-2xl text-left transition ${SIDEBAR_BUTTON_PADDING} ${
-                      assessmentsActive
+                      assignmentsActive
                         ? "bg-slate-100 text-slate-900 dark:bg-white/8 dark:text-white"
                         : "text-slate-700 hover:bg-slate-100 dark:text-white/85 dark:hover:bg-white/6 dark:hover:text-white"
                     }`}
                   >
                     <NotebookPen className="h-5 w-5 shrink-0" />
-                    <span className="ml-3 text-[15px] font-semibold tracking-tight">Assessments</span>
+                    <span className="ml-3 text-[15px] font-semibold tracking-tight">Assignments</span>
                     <span
                       className={`ml-auto transition-transform duration-300 ${
-                        assessmentsOpen ? "rotate-180" : "rotate-0"
+                        assignmentsOpen ? "rotate-180" : "rotate-0"
                       }`}
                     >
                       <ChevronDown className="h-4 w-4" />
@@ -253,8 +297,9 @@ export default function SideBar() {
                   </button>
 
                   <div
+                    id="sidebar-assignments-panel"
                     className={`overflow-hidden px-2 transition-[max-height,opacity] duration-300 ease-out ${
-                      assessmentsOpen ? "max-h-96 pb-2 opacity-100" : "max-h-0 pb-0 opacity-0"
+                      assignmentsOpen ? "max-h-96 pb-2 opacity-100" : "max-h-0 pb-0 opacity-0"
                     }`}
                   >
                       {assessmentItems.map((item) => {
@@ -301,7 +346,7 @@ export default function SideBar() {
                       : `w-full justify-start ${SIDEBAR_BUTTON_PADDING}`
                 }`}
               >
-                  <NavIcon icon={LogOut} />
+                  <NavIcon color="#FF746C" icon={LogOut} />
                   {!collapsed ? <span className="ml-3 text-[15px] font-semibold">Log out</span> : null}
                 </button>
             </SidebarTooltip>
@@ -309,65 +354,125 @@ export default function SideBar() {
         </div>
       </aside>
 
-      <div className="fixed inset-x-3 bottom-3 z-40 md:hidden">
-        <div
-          className={`mb-2 overflow-hidden rounded-2xl border border-black/10 bg-white p-2 shadow-xl transition-[max-height,opacity,transform] duration-300 ease-out dark:border-white/10 dark:bg-[#101216] ${
-            mobileExpanded
-              ? "pointer-events-auto max-h-96 translate-y-0 opacity-100"
-              : "pointer-events-none max-h-0 translate-y-2 opacity-0"
-          }`}
-        >
-            <div className="space-y-1">
-              {mobileExtra.map((item) => (
-                <Link
+      <div ref={mobileMenuRef} className="fixed inset-x-3 bottom-3 z-40 md:hidden">
+        <nav className="rounded-2xl border border-black/10 bg-white/95 p-2 backdrop-blur dark:border-[#3a3a3a] dark:bg-[#1a1a1a]/95">
+          <div className="flex items-stretch gap-1.5">
+            {mobilePrimary.map((item) =>
+              item.href === "/assignments" ? (
+                <div key={item.href} className="relative min-w-0 flex-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMoreOpen(false);
+                      setMobileAssignmentsOpen((prev) => !prev);
+                    }}
+                    className={`flex min-w-0 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 transition ${
+                      assignmentsActive || mobileAssignmentsOpen
+                        ? "bg-[#0046FF] text-white"
+                        : "text-[#121212]/70 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
+                    }`}
+                    aria-expanded={mobileAssignmentsOpen}
+                    aria-label="Toggle assignment options"
+                  >
+                    <NavIcon icon={NotebookPen} />
+                    <span className="truncate text-[11px] font-semibold max-[430px]:hidden">{item.label}</span>
+                  </button>
+                  <div
+                    className={`absolute bottom-full right-0 z-20 mb-2 w-[260px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-black/10 bg-white p-2 shadow-xl transition-[max-height,opacity,transform] duration-300 ease-out max-[350px]:w-[220px] dark:border-[#3a3a3a] dark:bg-[#1a1a1a] ${
+                      mobileAssignmentsOpen
+                        ? "pointer-events-auto max-h-96 translate-y-0 opacity-100"
+                        : "pointer-events-none max-h-0 translate-y-2 opacity-0"
+                    }`}
+                  >
+                    <div className="space-y-1">
+                      {assessmentItems.map((option) => (
+                        <Link
+                          key={option.href}
+                          href={option.href}
+                          onClick={() => {
+                            setMobileAssignmentsOpen(false);
+                            setMobileMoreOpen(false);
+                          }}
+                          className={`flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition max-[350px]:gap-2 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs ${
+                            pathname === option.href
+                              ? "bg-[#0046FF] text-white"
+                              : "text-[#121212]/75 hover:bg-black/5 dark:text-white/75 dark:hover:bg-white/10"
+                          }`}
+                        >
+                          <NavIcon icon={NotebookPen} />
+                          {option.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <MobileLink
                   key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileExpanded(false)}
-                  className={`flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition ${
-                    pathname === item.href
-                      ? "bg-[#0046FF] text-white"
-                      : "text-[#121212]/75 hover:bg-black/5 dark:text-white/75 dark:hover:bg-white/10"
-                  }`}
-                >
-                  <NavIcon icon={item.icon} />
-                  {item.label}
-                </Link>
-              ))}
+                  item={item}
+                  active={pathname === item.href}
+                  onPress={() => {
+                    setMobileAssignmentsOpen(false);
+                    setMobileMoreOpen(false);
+                  }}
+                />
+              )
+            )}
+            <div className="relative min-w-0 flex-1">
               <button
                 type="button"
-                // onClick={logout}
-                className="flex w-full cursor-pointer items-center gap-3 rounded-xl border border-black/10 px-3 py-2.5 text-left text-sm font-semibold text-[#121212]/75 transition hover:bg-black/5 dark:border-white/10 dark:text-white/75 dark:hover:bg-white/10"
+                onClick={() => {
+                  setMobileAssignmentsOpen(false);
+                  setMobileMoreOpen((prev) => !prev);
+                }}
+                className={`flex min-w-0 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-[11px] font-semibold transition ${
+                  mobileMoreOpen
+                    ? "bg-[#0046FF] text-white"
+                    : "text-[#121212]/75 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
+                }`}
+                aria-label="Toggle more navigation items"
+                aria-expanded={mobileMoreOpen}
               >
-                <NavIcon icon={LogOut} />
-                Log out
+                <NavIcon icon={Menu} />
+                <span className="max-[430px]:hidden">More</span>
               </button>
+              <div
+                className={`absolute bottom-full right-0 z-20 mb-2 w-[260px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-black/10 bg-white p-2 shadow-xl transition-[max-height,opacity,transform] duration-300 ease-out max-[350px]:w-[220px] dark:border-[#3a3a3a] dark:bg-[#1a1a1a] ${
+                  mobileMoreOpen
+                    ? "pointer-events-auto max-h-96 translate-y-0 opacity-100"
+                    : "pointer-events-none max-h-0 translate-y-2 opacity-0"
+                }`}
+              >
+                <div className="space-y-1">
+                  {mobileExtra.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => {
+                        setMobileAssignmentsOpen(false);
+                        setMobileMoreOpen(false);
+                      }}
+                      className={`flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition max-[350px]:gap-2 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs ${
+                        pathname === item.href
+                          ? "bg-[#0046FF] text-white"
+                          : "text-[#121212]/75 hover:bg-black/5 dark:text-white/75 dark:hover:bg-white/10"
+                      }`}
+                    >
+                      <NavIcon icon={item.icon} />
+                      {item.label}
+                    </Link>
+                  ))}
+                  <button
+                    type="button"
+                    // onClick={logout}
+                    className="flex w-full cursor-pointer items-center gap-3 rounded-xl border border-black/10 px-3 py-2.5 text-left text-sm font-semibold text-[#121212]/75 transition hover:bg-black/5 max-[350px]:gap-2 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs dark:border-white/10 dark:text-white/75 dark:hover:bg-white/10"
+                  >
+                    <NavIcon color="#FF746C" icon={LogOut} />
+                    Log out
+                  </button>
+                </div>
+              </div>
             </div>
-        </div>
-
-        <nav className="rounded-2xl border border-black/10 bg-white/95 p-2 backdrop-blur dark:border-white/10 dark:bg-[#101216]/95">
-          <div className="flex items-stretch gap-1.5">
-            {mobilePrimary.map((item) => (
-              <MobileLink
-                key={item.href}
-                item={item}
-                active={pathname === item.href}
-                onPress={() => setMobileExpanded(false)}
-              />
-            ))}
-            <button
-              type="button"
-              onClick={() => setMobileExpanded((prev) => !prev)}
-              className={`inline-flex w-[62px] cursor-pointer flex-col items-center justify-center gap-1 rounded-xl text-[11px] font-semibold transition ${
-                mobileExpanded
-                  ? "bg-[#0046FF] text-white"
-                  : "text-[#121212]/75 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
-              }`}
-              aria-label="Toggle more navigation items"
-              aria-expanded={mobileExpanded}
-            >
-              <NavIcon icon={Menu} />
-              More
-            </button>
           </div>
         </nav>
       </div>
