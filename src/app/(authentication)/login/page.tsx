@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import React from "react";
 import { loginSchema, LoginFormField } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,7 +29,7 @@ export default function LoginPage() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       throw new Error("Invalid credentials");
       console.log(data);
-    } catch (error) {
+    } catch {
       setError("root", {
         message: "Invalid username/email or password.",
       });
@@ -103,10 +103,10 @@ export default function LoginPage() {
 
           <Button
             type="submit"
-            className="w-full"
+            className="w-full flex items-center justify-center"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Logging in..." : "Login"}
+            {isSubmitting ? <LoaderCircle className="h-5 w-5 animate-spin" /> : "Login"}
           </Button>
         </form>
 
