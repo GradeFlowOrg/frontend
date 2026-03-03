@@ -3,33 +3,28 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent, type ReactNode } from "react";
-// import { logout } from '@/app/(authentication)/lib/actions'
+import { logout } from '@/app/(authentication)/lib/actions'
 import {
-  BookOpenCheck,
+  Bell,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  GraduationCap,
   House,
   LogOut,
   Menu,
   NotebookPen,
+  School,
   Settings,
-  Trophy,
   UserRound,
-  Waypoints,
-  type LucideIcon,
+  type LucideIcon
 } from "lucide-react";
-
-type NavItem = {
-  href: string;
-  label: string;
-  icon: LucideIcon;
-};
+import { NavItem } from "@/types";
 
 const COLLAPSED_BUTTON_SIZE = "h-11 w-11 min-h-11 min-w-11 shrink-0 aspect-square";
 const SIDEBAR_BUTTON_PADDING = "p-2.5";
 
-function NavIcon({ icon: Icon, color }: { icon: LucideIcon, color?:string }) {
+function NavIcon({ icon: Icon, color }: { icon: LucideIcon , color?:string }) {
   return (
     <span className="flex h-6 w-6 items-center justify-center">
       <Icon color={color} className="h-6 w-6 shrink-0" strokeWidth={2} absoluteStrokeWidth />
@@ -60,9 +55,9 @@ function SidebarTooltip({
 
 const topItems: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: House },
-  { href: "/classes", label: "Classes", icon: BookOpenCheck },
-  { href: "/school", label: "School", icon: Waypoints },
-  { href: "/notifications", label: "Notifications", icon: Trophy },
+  { href: "/classes", label: "Classes", icon: GraduationCap },
+  { href: "/school", label: "School", icon: School },
+  { href: "/notifications", label: "Notifications", icon: Bell },
 ];
 
 const assessmentItems = [
@@ -77,11 +72,11 @@ const bottomItems: NavItem[] = [
 
 const mobilePrimary: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: House },
-  { href: "/roadmaps", label: "Roadmaps", icon: Waypoints },
-  { href: "/competitions", label: "Competitions", icon: Trophy },
+  { href: "/classes", label: "Classes", icon: GraduationCap },
+  { href: "/school", label: "School", icon: School },
   { href: "/assignments", label: "Assignments", icon: NotebookPen },
 ];
-const mobileExtra = [...topItems.slice(4), ...bottomItems];
+const mobileExtra = [...topItems.slice(3), ...bottomItems];
 
 function NavLink({
   item,
@@ -163,11 +158,20 @@ export default function SideBar() {
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
   const assignmentsMenuRef = useRef<HTMLDivElement | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const expandAssignmentsTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const assignmentsActive = pathname.startsWith("/assignments");
 
   useEffect(() => {
     localStorage.setItem("gf-sidebar-collapsed", collapsed ? "1" : "0");
   }, [collapsed]);
+
+  useEffect(() => {
+    return () => {
+      if (expandAssignmentsTimerRef.current) {
+        clearTimeout(expandAssignmentsTimerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {
@@ -210,8 +214,15 @@ export default function SideBar() {
 
   const handleCollapsedassignmentsClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    if (expandAssignmentsTimerRef.current) {
+      clearTimeout(expandAssignmentsTimerRef.current);
+    }
+    setassignmentsOpen(false);
     setCollapsed(false);
-    setassignmentsOpen(true);
+    expandAssignmentsTimerRef.current = setTimeout(() => {
+      setassignmentsOpen(true);
+      expandAssignmentsTimerRef.current = null;
+    }, 320);
   };
 
   if (!mounted) {
@@ -226,7 +237,7 @@ export default function SideBar() {
             {!collapsed ? (
               <div className="min-w-0 pl-[10px]">
                 <p className="truncate font-[var(--font-montserrat)] text-2xl font-semibold leading-none">GradeFlow</p>
-                <p className="truncate mt-1 text-xs text-slate-500 dark:text-white/55">College Prep Community</p>
+                <p className="truncate mt-1 text-xs text-slate-500 dark:text-white/55">Your Academic Control Center</p>
               </div>
             ) : null}
             <button
@@ -252,7 +263,7 @@ export default function SideBar() {
               ))}
 
               {collapsed ? (
-                <SidebarTooltip label="assignments" collapsed={collapsed}>
+                <SidebarTooltip label="Assignments" collapsed={collapsed}>
                   <button
                     type="button"
                     onClick={handleCollapsedassignmentsClick}
@@ -302,6 +313,7 @@ export default function SideBar() {
                       assignmentsOpen ? "max-h-96 pb-2 opacity-100" : "max-h-0 pb-0 opacity-0"
                     }`}
                   >
+                    <div className="mt-2">
                       {assessmentItems.map((item) => {
                         const subActive = pathname === item.href;
                         return (
@@ -310,11 +322,11 @@ export default function SideBar() {
                             href={item.href}
                             className={`flex cursor-pointer items-center rounded-xl px-3 py-2 transition ${
                               subActive
-                                ? "bg-slate-100 text-[#e11d48] dark:bg-black/20"
+                                ? "text-[#0046FF]"
                                 : "text-slate-700 hover:bg-slate-100 dark:text-white/85 dark:hover:bg-white/6 dark:hover:text-white"
                             }`}
                           >
-                            <span className={`mr-3 h-2 w-2 rounded-full ${subActive ? "bg-[#e11d48]" : "bg-slate-500 dark:bg-white/80"}`} />
+                            <span className={`mr-3 h-2 w-2 rounded-full ${subActive ? "bg-[#0046FF]" : "bg-slate-500 dark:bg-white/80"}`} />
                             <span className="text-[15px] font-semibold">{item.label}</span>
                             {item.count > 0 ? (
                               <span className="ml-auto text-[28px] leading-none text-[#e11d48]">{item.count}</span>
@@ -322,6 +334,7 @@ export default function SideBar() {
                           </Link>
                         );
                       })}
+                    </div>
                   </div>
                 </div>
               )}
@@ -339,7 +352,7 @@ export default function SideBar() {
             <SidebarTooltip label="Log out" collapsed={collapsed}>
               <button
                 type="button"
-                // onClick={logout}
+                onClick={logout}
                 className={`flex cursor-pointer items-center rounded-2xl border border-slate-300 bg-slate-50 text-slate-700 transition hover:bg-slate-200 dark:border-white/12 dark:bg-white/7 dark:text-white/85 dark:hover:bg-white/15 dark:hover:text-white ${
                     collapsed
                       ? `mx-auto ${COLLAPSED_BUTTON_SIZE} ${SIDEBAR_BUTTON_PADDING} justify-center overflow-visible`
@@ -399,7 +412,7 @@ export default function SideBar() {
                               : "text-[#121212]/75 hover:bg-black/5 dark:text-white/75 dark:hover:bg-white/10"
                           }`}
                         >
-                          <NavIcon icon={NotebookPen} />
+                          <span className={`h-2 w-2 rounded-full ${pathname === option.href ? "bg-white" : "bg-slate-500 dark:bg-white/80"}`} />
                           {option.label}
                         </Link>
                       ))}
@@ -464,7 +477,7 @@ export default function SideBar() {
                   ))}
                   <button
                     type="button"
-                    // onClick={logout}
+                    onClick={logout}
                     className="flex w-full cursor-pointer items-center gap-3 rounded-xl border border-black/10 px-3 py-2.5 text-left text-sm font-semibold text-[#121212]/75 transition hover:bg-black/5 max-[350px]:gap-2 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs dark:border-white/10 dark:text-white/75 dark:hover:bg-white/10"
                   >
                     <NavIcon color="#FF746C" icon={LogOut} />
