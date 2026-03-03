@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent, type ReactNode } from "react";
-import { logout } from '@/app/(authentication)/lib/actions'
+// import { logout } from '@/app/(authentication)/lib/actions'
 import {
   Bell,
   ChevronDown,
@@ -352,7 +352,7 @@ export default function SideBar() {
             <SidebarTooltip label="Log out" collapsed={collapsed}>
               <button
                 type="button"
-                onClick={logout}
+                // onClick={logout}
                 className={`flex cursor-pointer items-center rounded-2xl border border-slate-300 bg-slate-50 text-slate-700 transition hover:bg-slate-200 dark:border-white/12 dark:bg-white/7 dark:text-white/85 dark:hover:bg-white/15 dark:hover:text-white ${
                     collapsed
                       ? `mx-auto ${COLLAPSED_BUTTON_SIZE} ${SIDEBAR_BUTTON_PADDING} justify-center overflow-visible`
@@ -477,7 +477,7 @@ export default function SideBar() {
                   ))}
                   <button
                     type="button"
-                    onClick={logout}
+                    // onClick={logout}
                     className="flex w-full cursor-pointer items-center gap-3 rounded-xl border border-black/10 px-3 py-2.5 text-left text-sm font-semibold text-[#121212]/75 transition hover:bg-black/5 max-[350px]:gap-2 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs dark:border-white/10 dark:text-white/75 dark:hover:bg-white/10"
                   >
                     <NavIcon color="#FF746C" icon={LogOut} />
