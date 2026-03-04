@@ -10,3 +10,7 @@ export type NavItem = {
   label: string;
   icon: LucideIcon;
 };
+
+export type LanguageSwitcherProps = {
+  compact?: boolean;
+};

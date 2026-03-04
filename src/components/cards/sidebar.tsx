@@ -1,9 +1,10 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent, type ReactNode } from "react";
-// import { logout } from '@/app/(authentication)/lib/actions'
+import { useTranslation } from "react-i18next";
+import { logout } from '@/app/(authentication)/lib/actions'
 import {
   Bell,
   ChevronDown,
@@ -53,31 +54,6 @@ function SidebarTooltip({
   );
 }
 
-const topItems: NavItem[] = [
-  { href: "/dashboard", label: "Dashboard", icon: House },
-  { href: "/classes", label: "Classes", icon: GraduationCap },
-  { href: "/school", label: "School", icon: School },
-  { href: "/notifications", label: "Notifications", icon: Bell },
-];
-
-const assessmentItems = [
-  { href: "/assignments/homework", label: "Homework", count: 0 },
-  { href: "/assignments/exams", label: "Exams", count: 1 },
-];
-
-const bottomItems: NavItem[] = [
-  { href: "/settings", label: "Settings", icon: Settings },
-  { href: "/profile", label: "Profile", icon: UserRound },
-];
-
-const mobilePrimary: NavItem[] = [
-  { href: "/dashboard", label: "Dashboard", icon: House },
-  { href: "/classes", label: "Classes", icon: GraduationCap },
-  { href: "/school", label: "School", icon: School },
-  { href: "/assignments", label: "Assignments", icon: NotebookPen },
-];
-const mobileExtra = [...topItems.slice(3), ...bottomItems];
-
 function NavLink({
   item,
   active,
@@ -95,6 +71,7 @@ function NavLink({
     <SidebarTooltip label={item.label} collapsed={collapsed}>
       <Link
         href={item.href}
+        prefetch={false}
         onClick={onClick}
         className={`group flex cursor-pointer items-center rounded-2xl border transition-all duration-200 ${
           collapsed
@@ -129,6 +106,7 @@ function MobileLink({
   return (
     <Link
       href={item.href}
+      prefetch={false}
       onClick={onPress}
       className={`flex min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 transition ${
         active
@@ -143,6 +121,7 @@ function MobileLink({
 }
 
 export default function SideBar() {
+  const { t } = useTranslation();
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -160,6 +139,30 @@ export default function SideBar() {
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const expandAssignmentsTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const assignmentsActive = pathname.startsWith("/assignments");
+  const topItems: NavItem[] = [
+    { href: "/dashboard", label: t("sidebar.dashboard"), icon: House },
+    { href: "/classes", label: t("sidebar.classes"), icon: GraduationCap },
+    { href: "/school", label: t("sidebar.school"), icon: School },
+    { href: "/notifications", label: t("sidebar.notifications"), icon: Bell },
+  ];
+
+  const assessmentItems = [
+    { href: "/assignments/homework", label: t("sidebar.homework"), count: 0 },
+    { href: "/assignments/exams", label: t("sidebar.exams"), count: 1 },
+  ];
+
+  const bottomItems: NavItem[] = [
+    { href: "/settings", label: t("sidebar.settings"), icon: Settings },
+    { href: "/profile", label: t("sidebar.profile"), icon: UserRound },
+  ];
+
+  const mobilePrimary: NavItem[] = [
+    { href: "/dashboard", label: t("sidebar.dashboard"), icon: House },
+    { href: "/classes", label: t("sidebar.classes"), icon: GraduationCap },
+    { href: "/school", label: t("sidebar.school"), icon: School },
+    { href: "/assignments", label: t("sidebar.assignments"), icon: NotebookPen },
+  ];
+  const mobileExtra = [...topItems.slice(3), ...bottomItems];
 
   useEffect(() => {
     localStorage.setItem("gf-sidebar-collapsed", collapsed ? "1" : "0");
@@ -237,14 +240,14 @@ export default function SideBar() {
             {!collapsed ? (
               <div className="min-w-0 pl-[10px]">
                 <p className="truncate font-[var(--font-montserrat)] text-2xl font-semibold leading-none">GradeFlow</p>
-                <p className="truncate mt-1 text-xs text-slate-500 dark:text-white/55">Your Academic Control Center</p>
+                <p className="truncate mt-1 text-xs text-slate-500 dark:text-white/55">{t("sidebar.brandSub")}</p>
               </div>
             ) : null}
             <button
               type="button"
               onClick={() => setCollapsed((prev) => !prev)}
               className={`inline-flex ${COLLAPSED_BUTTON_SIZE} ${SIDEBAR_BUTTON_PADDING} cursor-pointer items-center justify-center rounded-2xl border border-slate-300 bg-slate-50 text-slate-700 transition hover:bg-slate-200 dark:border-white/15 dark:bg-white/6 dark:text-white/85 dark:hover:bg-white/14 dark:hover:text-white`}
-              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              aria-label={collapsed ? t("sidebar.expand") : t("sidebar.collapse")}
             >
               {collapsed ? <NavIcon icon={ChevronRight} /> : <NavIcon icon={ChevronLeft} />}
             </button>
@@ -263,7 +266,7 @@ export default function SideBar() {
               ))}
 
               {collapsed ? (
-                <SidebarTooltip label="Assignments" collapsed={collapsed}>
+                <SidebarTooltip label={t("sidebar.assignments")} collapsed={collapsed}>
                   <button
                     type="button"
                     onClick={handleCollapsedassignmentsClick}
@@ -297,7 +300,7 @@ export default function SideBar() {
                     }`}
                   >
                     <NotebookPen className="h-5 w-5 shrink-0" />
-                    <span className="ml-3 text-[15px] font-semibold tracking-tight">Assignments</span>
+                    <span className="ml-3 text-[15px] font-semibold tracking-tight">{t("sidebar.assignments")}</span>
                     <span
                       className={`ml-auto transition-transform duration-300 ${
                         assignmentsOpen ? "rotate-180" : "rotate-0"
@@ -320,6 +323,7 @@ export default function SideBar() {
                           <Link
                             key={item.href}
                             href={item.href}
+                            prefetch={false}
                             className={`flex cursor-pointer items-center rounded-xl px-3 py-2 transition ${
                               subActive
                                 ? "text-[#0046FF]"
@@ -349,10 +353,10 @@ export default function SideBar() {
             {bottomItems.map((item) => (
               <NavLink key={item.href} item={item} collapsed={collapsed} active={pathname === item.href} />
             ))}
-            <SidebarTooltip label="Log out" collapsed={collapsed}>
+            <SidebarTooltip label={t("sidebar.logOut")} collapsed={collapsed}>
               <button
                 type="button"
-                // onClick={logout}
+                onClick={logout}
                 className={`flex cursor-pointer items-center rounded-2xl border border-slate-300 bg-slate-50 text-slate-700 transition hover:bg-slate-200 dark:border-white/12 dark:bg-white/7 dark:text-white/85 dark:hover:bg-white/15 dark:hover:text-white ${
                     collapsed
                       ? `mx-auto ${COLLAPSED_BUTTON_SIZE} ${SIDEBAR_BUTTON_PADDING} justify-center overflow-visible`
@@ -360,7 +364,7 @@ export default function SideBar() {
                 }`}
               >
                   <NavIcon color="#FF746C" icon={LogOut} />
-                  {!collapsed ? <span className="ml-3 text-[15px] font-semibold">Log out</span> : null}
+                  {!collapsed ? <span className="ml-3 text-[15px] font-semibold">{t("sidebar.logOut")}</span> : null}
                 </button>
             </SidebarTooltip>
           </div>
@@ -385,7 +389,7 @@ export default function SideBar() {
                         : "text-[#121212]/70 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
                     }`}
                     aria-expanded={mobileAssignmentsOpen}
-                    aria-label="Toggle assignment options"
+                    aria-label={t("sidebar.toggleAssignments")}
                   >
                     <NavIcon icon={NotebookPen} />
                     <span className="truncate text-[11px] font-semibold max-[430px]:hidden">{item.label}</span>
@@ -402,6 +406,7 @@ export default function SideBar() {
                         <Link
                           key={option.href}
                           href={option.href}
+                          prefetch={false}
                           onClick={() => {
                             setMobileAssignmentsOpen(false);
                             setMobileMoreOpen(false);
@@ -443,11 +448,11 @@ export default function SideBar() {
                     ? "bg-[#0046FF] text-white"
                     : "text-[#121212]/75 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
                 }`}
-                aria-label="Toggle more navigation items"
+                aria-label={t("sidebar.toggleMore")}
                 aria-expanded={mobileMoreOpen}
               >
                 <NavIcon icon={Menu} />
-                <span className="max-[430px]:hidden">More</span>
+                <span className="max-[430px]:hidden">{t("sidebar.more")}</span>
               </button>
               <div
                 className={`absolute bottom-full right-0 z-20 mb-2 w-[260px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-black/10 bg-white p-2 shadow-xl transition-[max-height,opacity,transform] duration-300 ease-out max-[350px]:w-[220px] dark:border-[#3a3a3a] dark:bg-[#1a1a1a] ${
@@ -461,6 +466,7 @@ export default function SideBar() {
                     <Link
                       key={item.href}
                       href={item.href}
+                      prefetch={false}
                       onClick={() => {
                         setMobileAssignmentsOpen(false);
                         setMobileMoreOpen(false);
@@ -477,11 +483,11 @@ export default function SideBar() {
                   ))}
                   <button
                     type="button"
-                    // onClick={logout}
+                    onClick={logout}
                     className="flex w-full cursor-pointer items-center gap-3 rounded-xl border border-black/10 px-3 py-2.5 text-left text-sm font-semibold text-[#121212]/75 transition hover:bg-black/5 max-[350px]:gap-2 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs dark:border-white/10 dark:text-white/75 dark:hover:bg-white/10"
                   >
                     <NavIcon color="#FF746C" icon={LogOut} />
-                    Log out
+                    {t("sidebar.logOut")}
                   </button>
                 </div>
               </div>
@@ -492,3 +498,5 @@ export default function SideBar() {
     </>
   );
 }
+
+

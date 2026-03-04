@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Input from "@/components/ui/Input";
@@ -7,6 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { SignupFormField, signupSchema } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import {
   InputOTP,
@@ -22,6 +23,7 @@ const stepFields: Array<Array<keyof SignupFormField>> = [
 ];
 
 export default function SignupPage() {
+  const { t } = useTranslation();
   const DEMO_VERIFICATION_CODE = "123456";
   const [step, setStep] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
@@ -62,7 +64,7 @@ export default function SignupPage() {
       const code = watch("verificationCode")?.trim();
       if (code !== DEMO_VERIFICATION_CODE) {
         setError("verificationCode", {
-          message: "Verification code is incorrect.",
+          message: t("auth.signup.verificationIncorrect"),
         });
         return;
       }
@@ -89,7 +91,7 @@ export default function SignupPage() {
       console.log(data);
     } catch {
       setError("root", {
-        message: "Signup UI is ready. Backend connection is not implemented yet.",
+        message: t("auth.signup.backendMissing"),
       });
     }
   };
@@ -99,19 +101,19 @@ export default function SignupPage() {
       <div className="mx-auto w-full max-w-xl rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur dark:border-white/10 dark:bg-[#111827]/80">
         <div className="mb-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0046FF] dark:text-[#8fb0ff]">
-            GradeFlow Access
+            {t("auth.signup.access")}
           </p>
           <h2 className="mt-2 text-2xl font-bold text-[#0F2854] dark:text-white">
-            Create your account
+            {t("auth.signup.title")}
           </h2>
           <p className="mt-2 text-sm text-[#355181] dark:text-slate-300">
-            Multi-step signup for teachers and students. Quick to start, easier to finish.
+            {t("auth.signup.subtitle")}
           </p>
         </div>
 
         <div className="mb-6">
           <div className="mb-2 flex items-center justify-between text-xs font-medium text-[#355181] dark:text-slate-300">
-            <span>Step {step + 1} of 3</span>
+            <span>{t("auth.signup.step", { current: step + 1, total: 3 })}</span>
             <span>{Math.round(progress)}%</span>
           </div>
           <div className="h-2 rounded-full bg-black/5 dark:bg-white/10">
@@ -135,7 +137,7 @@ export default function SignupPage() {
                       : "border-black/10 text-[#355181] hover:bg-[#f4f8ff] dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/10"
                       }`}
                   >
-                    Student
+                    {t("auth.signup.student")}
                   </button>
                   <button
                     type="button"
@@ -145,7 +147,7 @@ export default function SignupPage() {
                       : "border-black/10 text-[#355181] hover:bg-[#f4f8ff] dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/10"
                       }`}
                   >
-                    Teacher
+                    {t("auth.signup.teacher")}
                   </button>
                 </div>
                 {errors.role && (
@@ -154,11 +156,11 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">Full name</label>
+                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">{t("auth.signup.fullName")}</label>
                 <Input
                   {...register("fullName")}
                   type="text"
-                  placeholder="Enter your full name"
+                  placeholder={t("auth.signup.fullNamePlaceholder")}
                   className={`w-full ${errors.fullName ? "border-red-500 focus:border-red-500 dark:border-red-400" : ""}`}
                 />
                 {errors.fullName && (
@@ -167,11 +169,11 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">Email</label>
+                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">{t("auth.signup.email")}</label>
                 <Input
                   {...register("email")}
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={t("auth.signup.emailPlaceholder")}
                   className={`w-full ${errors.email ? "border-red-500 focus:border-red-500 dark:border-red-400" : ""}`}
                 />
                 {errors.email && (
@@ -185,11 +187,11 @@ export default function SignupPage() {
             <>
               <div>
                 <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">
-                  Email verification code
+                  {t("auth.signup.verificationLabel")}
                 </label>
                 <p className="mb-2 text-xs text-[#355181] dark:text-slate-300">
-                  Enter the 6-digit code sent to <span className="font-medium">{watch("email") || "your email"}</span>.
-                  Demo code: <span className="font-semibold text-[#0046FF]">{DEMO_VERIFICATION_CODE}</span>
+                  {t("auth.signup.verificationHelp", { email: watch("email") || t("auth.signup.yourEmail") })}{" "}
+                  {t("auth.signup.demoCode")}: <span className="font-semibold text-[#0046FF]">{DEMO_VERIFICATION_CODE}</span>
                 </p>
                 <div className="flex w-full justify-center">
                   <Controller
@@ -228,7 +230,7 @@ export default function SignupPage() {
           {step === 2 && (
             <>
               <div>
-                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">Username</label>
+                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">{t("auth.signup.username")}</label>
                 <Input
                   {...register("username")}
                   type="text"
@@ -241,19 +243,19 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">Password</label>
+                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">{t("auth.signup.password")}</label>
                 <div className="relative">
                   <Input
                     {...register("password")}
                     type={showPassword ? "text" : "password"}
-                    placeholder="Create a password"
+                    placeholder={t("auth.signup.createPasswordPlaceholder")}
                     className={`w-full pr-11 ${errors.password ? "border-red-500 focus:border-red-500 dark:border-red-400" : ""}`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword((prev) => !prev)}
                     className="absolute inset-y-1 right-1 inline-flex w-8 cursor-pointer items-center justify-center rounded-md text-[#355181] transition hover:bg-slate-100 hover:text-[#0046FF] focus-visible:outline-none dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-label={showPassword ? t("auth.signup.hidePassword") : t("auth.signup.showPassword")}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
@@ -264,19 +266,19 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">Confirm password</label>
+                <label className="mb-1 block text-sm font-medium text-[#0F2854] dark:text-white">{t("auth.signup.confirmPassword")}</label>
                 <div className="relative">
                   <Input
                     {...register("confirmPassword")}
                     type={showConfirmPassword ? "text" : "password"}
-                    placeholder="Re-enter your password"
+                    placeholder={t("auth.signup.confirmPasswordPlaceholder")}
                     className={`w-full pr-11 ${errors.confirmPassword ? "border-red-500 focus:border-red-500 dark:border-red-400" : ""}`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword((prev) => !prev)}
                     className="absolute inset-y-1 right-1 inline-flex w-8 cursor-pointer items-center justify-center rounded-md text-[#355181] transition hover:bg-slate-100 hover:text-[#0046FF] focus-visible:outline-none dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
-                    aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                    aria-label={showConfirmPassword ? t("auth.signup.hideConfirmPassword") : t("auth.signup.showConfirmPassword")}
                   >
                     {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
@@ -293,7 +295,7 @@ export default function SignupPage() {
                   className="mt-0.5 h-4 w-4 accent-[#0046FF]"
                 />
                 <span>
-                  I agree to the Terms and Privacy Policy and understand this is a UI-only demo flow.
+                  {t("auth.signup.terms")}
                 </span>
               </label>
               {errors.termsAccepted && (
@@ -313,29 +315,30 @@ export default function SignupPage() {
               disabled={step === 0 ? true : false}
               className={`mt-0 w-full border border-[#c7d8ff] bg-white text-[#0F2854] hover:bg-[#eef4ff] hover:text-[#0046FF] dark:border-white/15 dark:bg-[#0b1220] dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white sm:w-auto sm:min-w-28 `}
             >
-              Back
+              {t("auth.signup.back")}
             </Button>
 
 
             {step < 2 ? (
               <Button type="button" onClick={nextStep} className="w-full sm:w-auto sm:min-w-32">
-                Continue
+                {t("auth.signup.continue")}
               </Button>
             ) : (
               <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto sm:min-w-40">
-                {isSubmitting ? "Creating..." : `Create ${role} account`}
+                {isSubmitting ? t("auth.signup.creating") : t("auth.signup.createAccount", { role })}
               </Button>
             )}
           </div>
         </form>
 
         {step === 0 && (<p className="mt-5 text-center text-sm text-[#355181] dark:text-slate-300">
-          Already have an account?{" "}
+          {t("auth.signup.alreadyAccount")}{" "}
           <Link href="/login" className="font-semibold text-[#0046FF]">
-            Login
+            {t("auth.signup.login")}
           </Link>
         </p>)}
       </div>
     </section>
   );
 }
+

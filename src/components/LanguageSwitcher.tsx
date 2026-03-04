@@ -1,0 +1,61 @@
+﻿"use client";
+
+import { useSyncExternalStore } from "react";
+import { useTranslation } from "react-i18next";
+
+import { supportedLanguages, type AppLanguage } from "@/i18n/resources";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import type { LanguageSwitcherProps } from "@/types";
+
+
+
+export default function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
+  const { i18n, t } = useTranslation();
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
+  if (!mounted) {
+    return null;
+  }
+
+  const currentLanguage = (i18n.resolvedLanguage ?? i18n.language ?? "en") as AppLanguage;
+
+  return (
+    <div className={`inline-flex items-center gap-2 ${compact ? "justify-center" : ""}`}>
+      {!compact ? (
+        <span className="text-xs font-medium text-slate-600 dark:text-slate-300">{t("language.shortLabel")}</span>
+      ) : null}
+      <Select
+        value={supportedLanguages.includes(currentLanguage) ? currentLanguage : "en"}
+        onValueChange={(value) => {
+          window.localStorage.setItem("gf-language", value);
+          void i18n.changeLanguage(value);
+        }}
+      >
+        <SelectTrigger
+          className={`${compact ? "h-8 w-14 px-2 text-xs" : "h-9 w-20 text-sm"}`}
+          aria-label={t("language.label")}
+        >
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {supportedLanguages.map((language) => (
+            <SelectItem key={language} value={language}>
+              {language.toUpperCase()}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}

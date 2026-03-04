@@ -3,11 +3,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const PasswordReset = () => {
+const Page = () => {
   const { t } = useTranslation();
 
-  return <div>{t("auth.passwordReset.title")}</div>;
+  return <div>{t("root.pages.classes")}</div>;
 };
 
-export default PasswordReset;
+export default Page;
 
