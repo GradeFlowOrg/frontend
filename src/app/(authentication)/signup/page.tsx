@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
-import { Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, House } from "lucide-react";
 import { SignupFormField, signupSchema } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useMemo, useState } from "react";
@@ -98,8 +98,20 @@ export default function SignupPage() {
 
   return (
     <section className="w-full px-4">
-      <div className="mx-auto w-full max-w-xl rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur dark:border-white/10 dark:bg-[#111827]/80">
+      <div className="mx-auto relative w-full max-w-xl rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur dark:border-white/10 dark:bg-[#111827]/80">
         <div className="mb-6">
+          <div className="flex justify-end">
+            <Link
+              href="/"
+              aria-label={t("auth.common.backToLanding")}
+              className="absolute top-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#c7d8ff] bg-white text-[#0F2854] transition hover:bg-[#eef4ff] hover:text-[#0046FF] dark:border-white/15 dark:bg-[#0b1220] dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white"
+            >
+              <span className="inline-flex items-center gap-0.5">
+                <ArrowLeft className="h-3.5 w-3.5" />
+                {/* <House className="h-3.5 w-3.5" /> */}
+              </span>
+            </Link>
+          </div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0046FF] dark:text-[#8fb0ff]">
             {t("auth.signup.access")}
           </p>

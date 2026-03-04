@@ -93,6 +93,9 @@ translation: {
         },
       },
       auth: {
+        common: {
+          backToLanding: "Назад на лендинг",
+        },
         login: {
           access: "Доступ GradeFlow",
           title: "С возвращением",

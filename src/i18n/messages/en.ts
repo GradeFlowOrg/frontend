@@ -93,6 +93,9 @@ translation: {
         },
       },
       auth: {
+        common: {
+          backToLanding: "Back to landing",
+        },
         login: {
           access: "GradeFlow Access",
           title: "Welcome back",

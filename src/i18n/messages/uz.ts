@@ -93,6 +93,9 @@ translation: {
         },
       },
       auth: {
+        common: {
+          backToLanding: "Landing sahifaga qaytish",
+        },
         login: {
           access: "GradeFlow kirishi",
           title: "Xush kelibsiz",
