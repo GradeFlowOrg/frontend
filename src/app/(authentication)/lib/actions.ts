@@ -6,7 +6,7 @@ import { loginSchema } from "@/schemas";
 
 const testUser = {
   id: "1",
-  identifier: "abdulazizyusupaliev009@gmail.com",
+  identifier: "abdulaziz",
   password: "123456",
 };
 

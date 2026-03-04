@@ -27,8 +27,8 @@ export default function LoginPage() {
   } = useForm<LoginFormField>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      identifier: "abdulazizyusupaliev009@gmail.com",
-      password: "123456",
+      identifier: "",
+      password: "",
     },
   });
 
