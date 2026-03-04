@@ -1,5 +1,5 @@
-import SideBar from "@/components/cards/sidebar";
-import Navbar from "@/components/cards/Navbar";
+import SideBar from "@/components/ui/SideBar";
+import Navbar from "@/components/ui/Navbar";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
