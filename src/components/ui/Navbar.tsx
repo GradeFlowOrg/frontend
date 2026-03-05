@@ -55,11 +55,9 @@ const Navbar = () => {
   if (!isMobile) return null;
 
   return (
-    <div className="w-full">
-      <nav className="relative overflow-hidden rounded-2xl border border-black/10 bg-white/95 px-4 py-3 backdrop-blur dark:border-[#3a3a3a] dark:bg-[#1a1a1a]/95">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,70,255,0.15),transparent_40%)]" />
-
-        <div className="relative flex items-start justify-between gap-3">
+    <div className="sticky top-3 z-30 w-full">
+      <nav className="rounded-2xl border border-black/10 bg-white px-4 py-3 dark:border-[#3a3a3a] dark:bg-[#1a1a1a]">
+        <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <h1 className="truncate text-lg font-bold text-[#0F2854] dark:text-white">{pageTitle}</h1>
 
