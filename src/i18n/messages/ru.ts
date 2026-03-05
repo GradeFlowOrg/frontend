@@ -49,7 +49,7 @@ translation: {
           title: "Создавайте и проходите школьные тесты онлайн за минуты.",
           subtitle: "Без печати. Мгновенная проверка. Просто для учителей и учеников.",
           teacherCta: "Начать как учитель",
-          studentCta: "Начать как ученик",
+          studentCta: "Войти",
         },
         howItWorks: {
           title: "Как это работает",
@@ -93,6 +93,9 @@ translation: {
         },
       },
       auth: {
+        common: {
+          backToLanding: "Назад на лендинг",
+        },
         login: {
           access: "Доступ GradeFlow",
           title: "С возвращением",

@@ -234,7 +234,7 @@ export default function SideBar() {
 
   return (
     <>
-      <aside className={`hidden md:flex ${desktopWidth} shrink-0 p-4 transition-[width] duration-300`}>
+      <aside className={`hidden md:sticky md:top-0 md:flex md:h-screen ${desktopWidth} shrink-0 p-4 transition-[width] duration-300`}>
         <div className="relative flex h-[calc(100vh-2rem)] w-full flex-col overflow-visible rounded-[28px] border border-black/10 bg-white p-3 text-slate-900 shadow-sm dark:border-[#3a3a3a] dark:bg-[#1a1a1a] dark:text-white dark:shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
           <div className={`mb-4 ${collapsed ? "flex justify-center" : "flex items-start justify-between"}`}>
             {!collapsed ? (

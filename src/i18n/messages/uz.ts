@@ -49,7 +49,7 @@ translation: {
           title: "Maktab testlarini bir necha daqiqada onlayn yarating va ishlang.",
           subtitle: "Qog'ozsiz. Darhol baholash. O'qituvchi va o'quvchi uchun sodda.",
           teacherCta: "O'qituvchi sifatida boshlash",
-          studentCta: "O'quvchi sifatida boshlash",
+          studentCta: "boshlash",
         },
         howItWorks: {
           title: "Qanday ishlaydi",
@@ -93,6 +93,9 @@ translation: {
         },
       },
       auth: {
+        common: {
+          backToLanding: "Landing sahifaga qaytish",
+        },
         login: {
           access: "GradeFlow kirishi",
           title: "Xush kelibsiz",
