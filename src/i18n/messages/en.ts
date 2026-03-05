@@ -49,7 +49,7 @@ translation: {
           title: "Create and take school tests online in minutes.",
           subtitle: "No printing. Instant grading. Simple for teachers and students.",
           teacherCta: "Start as Teacher",
-          studentCta: "Start as Student",
+          studentCta: "Log in",
         },
         howItWorks: {
           title: "How it works",
