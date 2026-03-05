@@ -25,6 +25,12 @@ export default function Navbar() {
     section.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const scrollToAccordion = () => {
+    const section = document.getElementById("accordion");
+    if (!section) return;
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <nav className="w-full border-b border-black/10 bg-gradient-to-b from-[#e9f0ff] to-[#dce8ff] p-4 text-white dark:border-white/10 dark:from-[#0b1220] dark:to-[#111827]">
       <div className="container mx-auto">
@@ -50,6 +56,12 @@ export default function Navbar() {
                 className="cursor-pointer text-[15px] font-medium text-[#000] transition-all duration-300 hover:text-[#0046FF] dark:text-[white]"
               >
                 {t("landing.nav.howItWorks")}
+              </li>
+              <li
+                onClick={scrollToAccordion}
+                className="cursor-pointer text-[15px] font-medium text-[#000] transition-all duration-300 hover:text-[#0046FF] dark:text-[white]"
+              >
+                {t("landing.nav.accordion")}
               </li>
             </ul>
             <span className="text-[#000] max-[774px]:hidden dark:text-white">|</span>

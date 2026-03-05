@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import { Bell } from "lucide-react";
 
 import { useMobile } from "@/hooks/useMobile";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -57,20 +56,20 @@ const Navbar = () => {
   return (
     <div className="sticky top-3 z-30 w-full">
       <nav className="rounded-2xl border border-black/10 bg-white px-4 py-3 dark:border-[#3a3a3a] dark:bg-[#1a1a1a]">
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="truncate text-lg font-bold text-[#0F2854] dark:text-white">{pageTitle}</h1>
+            <h1 className="truncate text-lg font-bold text-slate-700 dark:text-white">{pageTitle}</h1>
 
             <Breadcrumb className="mt-1">
-              <BreadcrumbList>
+              <BreadcrumbList className="text-slate-500 dark:text-slate-300">
                 {crumbs.map((crumb, index) => (
                   <React.Fragment key={crumb.href}>
-                    {index > 0 ? <BreadcrumbSeparator /> : null}
+                    {index > 0 ? <BreadcrumbSeparator className="text-slate-400 dark:text-slate-500" /> : null}
                     <BreadcrumbItem>
                       {index === crumbs.length - 1 ? (
-                        <BreadcrumbPage>{crumb.label}</BreadcrumbPage>
+                        <BreadcrumbPage className="text-slate-600 dark:text-slate-200">{crumb.label}</BreadcrumbPage>
                       ) : (
-                        <Link href={crumb.href} className="text-slate-500 transition hover:text-[#0046FF] dark:text-slate-300 dark:hover:text-white">
+                        <Link href={crumb.href} className="text-slate-500 transition hover:text-slate-700 dark:text-slate-300 dark:hover:text-white">
                           {crumb.label}
                         </Link>
                       )}
@@ -82,10 +81,9 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <LanguageSwitcher compact />
             <Link
               href="/notifications"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-black/10 bg-white text-[#0F2854] transition hover:bg-[#f4f8ff] dark:border-white/10 dark:bg-[#101623] dark:text-white dark:hover:bg-[#1d2639]"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-black/10 bg-white text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:bg-[#242424] dark:text-slate-300 dark:hover:bg-[#2f2f2f] dark:hover:text-slate-100"
               aria-label={t("root.pages.notifications")}
             >
               <Bell className="h-4 w-4" />

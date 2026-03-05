@@ -42,6 +42,7 @@ translation: {
         nav: {
           features: "Features",
           howItWorks: "How it works",
+          accordion: "FAQ",
           login: "Login",
           signup: "Sign up",
         },
@@ -75,12 +76,34 @@ translation: {
           questionBankTitle: "Reusable Question Bank",
           questionBankDesc: "Save questions and reuse them for future exams.",
         },
+        accordion: {
+          label: "FAQ",
+          title: "Everything you need to know before you start",
+          subtitle: "Quick answers for teachers and students using GradeFlow.",
+          item1: {
+            question: "Do students need to install an app?",
+            answer: "No. GradeFlow works directly in the browser on phones, tablets, and laptops.",
+          },
+          item2: {
+            question: "Can I set a timer for tests?",
+            answer: "Yes. You can configure exam duration and submissions will close automatically when time is over.",
+          },
+          item3: {
+            question: "How are results calculated?",
+            answer: "Objective questions are graded instantly and performance insights are shown right after submission.",
+          },
+          item4: {
+            question: "Can I reuse my old questions?",
+            answer: "Yes. Save questions to your bank and reuse them for homework, quizzes, or exams.",
+          },
+        },
         footer: {
           description: "Create, share, and grade school tests online in minutes with instant analytics.",
           quickLinks: "Quick Links",
           home: "Home",
           howItWorks: "How It Works",
           features: "Features",
+          accordion: "FAQ",
           product: "Product",
           teacherDashboard: "Teacher Dashboard",
           studentAccess: "Student Access",

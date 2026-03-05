@@ -21,6 +21,13 @@ import {
   type LucideIcon
 } from "lucide-react";
 import { NavItem } from "@/types";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const COLLAPSED_BUTTON_SIZE = "h-11 w-11 min-h-11 min-w-11 shrink-0 aspect-square";
 const SIDEBAR_BUTTON_PADDING = "p-2.5";
@@ -136,7 +143,6 @@ export default function SideBar() {
   const [mobileAssignmentsOpen, setMobileAssignmentsOpen] = useState(false);
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
   const assignmentsMenuRef = useRef<HTMLDivElement | null>(null);
-  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const expandAssignmentsTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const assignmentsActive = pathname.startsWith("/assignments");
   const topItems: NavItem[] = [
@@ -188,20 +194,11 @@ export default function SideBar() {
         }
       }
 
-      if (mobileAssignmentsOpen || mobileMoreOpen) {
-        const mobileMenu = mobileMenuRef.current;
-        if (mobileMenu && !mobileMenu.contains(target)) {
-          setMobileAssignmentsOpen(false);
-          setMobileMoreOpen(false);
-        }
-      }
     };
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
       if (assignmentsOpen) setassignmentsOpen(false);
-      if (mobileAssignmentsOpen) setMobileAssignmentsOpen(false);
-      if (mobileMoreOpen) setMobileMoreOpen(false);
     };
 
     document.addEventListener("pointerdown", handlePointerDown, true);
@@ -211,7 +208,7 @@ export default function SideBar() {
       document.removeEventListener("pointerdown", handlePointerDown, true);
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [assignmentsOpen, mobileAssignmentsOpen, mobileMoreOpen]);
+  }, [assignmentsOpen]);
 
   const desktopWidth = useMemo(() => (collapsed ? "w-[96px]" : "w-[300px]"), [collapsed]);
 
@@ -371,59 +368,61 @@ export default function SideBar() {
         </div>
       </aside>
 
-      <div ref={mobileMenuRef} className="fixed inset-x-3 bottom-3 z-40 md:hidden">
+      <div className="fixed inset-x-3 bottom-3 z-40 md:hidden">
         <nav className="rounded-2xl border border-black/10 bg-white/95 p-2 backdrop-blur dark:border-[#3a3a3a] dark:bg-[#1a1a1a]/95">
           <div className="flex items-stretch gap-1.5">
             {mobilePrimary.map((item) =>
               item.href === "/assignments" ? (
-                <div key={item.href} className="relative min-w-0 flex-1">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMobileMoreOpen(false);
-                      setMobileAssignmentsOpen((prev) => !prev);
-                    }}
-                    className={`flex min-w-0 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 transition ${
-                      assignmentsActive || mobileAssignmentsOpen
-                        ? "bg-[#0046FF] text-white"
-                        : "text-[#121212]/70 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
-                    }`}
-                    aria-expanded={mobileAssignmentsOpen}
-                    aria-label={t("sidebar.toggleAssignments")}
+                <DropdownMenu
+                  key={item.href}
+                  open={mobileAssignmentsOpen}
+                  onOpenChange={(open) => {
+                    setMobileAssignmentsOpen(open);
+                    if (open) setMobileMoreOpen(false);
+                  }}
+                >
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      type="button"
+                      className={`flex min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 transition ${
+                        assignmentsActive || mobileAssignmentsOpen
+                          ? "bg-[#0046FF] text-white"
+                          : "text-[#121212]/70 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
+                      }`}
+                      aria-label={t("sidebar.toggleAssignments")}
+                    >
+                      <NavIcon icon={NotebookPen} />
+                      <span className="truncate text-[11px] font-semibold max-[430px]:hidden">{item.label}</span>
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    side="top"
+                    align="end"
+                    className="mb-2 w-[260px] rounded-2xl border-black/10 bg-white p-2 shadow-xl max-[350px]:w-[220px] dark:border-[#3a3a3a] dark:bg-[#1a1a1a]"
                   >
-                    <NavIcon icon={NotebookPen} />
-                    <span className="truncate text-[11px] font-semibold max-[430px]:hidden">{item.label}</span>
-                  </button>
-                  <div
-                    className={`absolute bottom-full right-0 z-20 mb-2 w-[260px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-black/10 bg-white p-2 shadow-xl transition-[max-height,opacity,transform] duration-300 ease-out max-[350px]:w-[220px] dark:border-[#3a3a3a] dark:bg-[#1a1a1a] ${
-                      mobileAssignmentsOpen
-                        ? "pointer-events-auto max-h-96 translate-y-0 opacity-100"
-                        : "pointer-events-none max-h-0 translate-y-2 opacity-0"
-                    }`}
-                  >
-                    <div className="space-y-1">
-                      {assessmentItems.map((option) => (
-                        <Link
-                          key={option.href}
-                          href={option.href}
-                          prefetch={false}
-                          onClick={() => {
-                            setMobileAssignmentsOpen(false);
-                            setMobileMoreOpen(false);
-                          }}
-                          className={`flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition max-[350px]:gap-2 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs ${
-                            pathname === option.href
-                              ? "bg-[#0046FF] text-white"
-                              : "text-[#121212]/75 hover:bg-black/5 dark:text-white/75 dark:hover:bg-white/10"
-                          }`}
-                        >
+                    {assessmentItems.map((option) => (
+                      <DropdownMenuItem
+                        key={option.href}
+                        asChild
+                        className={`cursor-pointer rounded-xl px-3 py-2.5 text-sm font-semibold max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs ${
+                          pathname === option.href
+                            ? "bg-[#0046FF] text-white focus:bg-[#0046FF] focus:text-white"
+                            : "text-[#121212]/75 dark:text-white/75"
+                        }`}
+                      >
+                        <Link href={option.href} prefetch={false}>
                           <span className={`h-2 w-2 rounded-full ${pathname === option.href ? "bg-white" : "bg-slate-500 dark:bg-white/80"}`} />
-                          {option.label}
+                          <span className="ml-3">{option.label}</span>
+                          {option.count > 0 ? (
+                            <span className="ml-auto text-[18px] leading-none text-[#e11d48]">
+                              {option.count}
+                            </span>
+                          ) : null}
                         </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <MobileLink
                   key={item.href}
@@ -436,62 +435,61 @@ export default function SideBar() {
                 />
               )
             )}
-            <div className="relative min-w-0 flex-1">
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileAssignmentsOpen(false);
-                  setMobileMoreOpen((prev) => !prev);
-                }}
-                className={`flex min-w-0 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-[11px] font-semibold transition ${
-                  mobileMoreOpen
-                    ? "bg-[#0046FF] text-white"
-                    : "text-[#121212]/75 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
-                }`}
-                aria-label={t("sidebar.toggleMore")}
-                aria-expanded={mobileMoreOpen}
+            <DropdownMenu
+              open={mobileMoreOpen}
+              onOpenChange={(open) => {
+                setMobileMoreOpen(open);
+                if (open) setMobileAssignmentsOpen(false);
+              }}
+            >
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className={`flex min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-[11px] font-semibold transition ${
+                    mobileMoreOpen
+                      ? "bg-[#0046FF] text-white"
+                      : "text-[#121212]/75 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
+                  }`}
+                  aria-label={t("sidebar.toggleMore")}
+                >
+                  <NavIcon icon={Menu} />
+                  <span className="max-[430px]:hidden">{t("sidebar.more")}</span>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                side="top"
+                align="end"
+                className="mb-2 w-[260px] rounded-2xl border-black/10 bg-white p-2 shadow-xl max-[350px]:w-[220px] dark:border-[#3a3a3a] dark:bg-[#1a1a1a]"
               >
-                <NavIcon icon={Menu} />
-                <span className="max-[430px]:hidden">{t("sidebar.more")}</span>
-              </button>
-              <div
-                className={`absolute bottom-full right-0 z-20 mb-2 w-[260px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-black/10 bg-white p-2 shadow-xl transition-[max-height,opacity,transform] duration-300 ease-out max-[350px]:w-[220px] dark:border-[#3a3a3a] dark:bg-[#1a1a1a] ${
-                  mobileMoreOpen
-                    ? "pointer-events-auto max-h-96 translate-y-0 opacity-100"
-                    : "pointer-events-none max-h-0 translate-y-2 opacity-0"
-                }`}
-              >
-                <div className="space-y-1">
-                  {mobileExtra.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      prefetch={false}
-                      onClick={() => {
-                        setMobileAssignmentsOpen(false);
-                        setMobileMoreOpen(false);
-                      }}
-                      className={`flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition max-[350px]:gap-2 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs ${
-                        pathname === item.href
-                          ? "bg-[#0046FF] text-white"
-                          : "text-[#121212]/75 hover:bg-black/5 dark:text-white/75 dark:hover:bg-white/10"
-                      }`}
-                    >
-                      <NavIcon icon={item.icon} />
-                      {item.label}
-                    </Link>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={logout}
-                    className="flex w-full cursor-pointer items-center gap-3 rounded-xl border border-black/10 px-3 py-2.5 text-left text-sm font-semibold text-[#121212]/75 transition hover:bg-black/5 max-[350px]:gap-2 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs dark:border-white/10 dark:text-white/75 dark:hover:bg-white/10"
+                {mobileExtra.map((item) => (
+                  <DropdownMenuItem
+                    key={item.href}
+                    asChild
+                    className={`cursor-pointer rounded-xl px-3 py-2.5 text-sm font-semibold max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs ${
+                      pathname === item.href
+                        ? "bg-[#0046FF] text-white focus:bg-[#0046FF] focus:text-white"
+                        : "text-[#121212]/75 dark:text-white/75"
+                    }`}
                   >
-                    <NavIcon color="#FF746C" icon={LogOut} />
-                    {t("sidebar.logOut")}
-                  </button>
-                </div>
-              </div>
-            </div>
+                    <Link href={item.href} prefetch={false}>
+                      <NavIcon icon={item.icon} />
+                      <span className="ml-3">{item.label}</span>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuSeparator className="my-1.5" />
+                <DropdownMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    logout();
+                  }}
+                  className="cursor-pointer rounded-xl px-3 py-2.5 text-sm font-semibold text-[#121212]/75 max-[350px]:rounded-lg max-[350px]:px-2.5 max-[350px]:py-2 max-[350px]:text-xs dark:text-white/75"
+                >
+                  <NavIcon color="#FF746C" icon={LogOut} />
+                  <span className="ml-3">{t("sidebar.logOut")}</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </nav>
       </div>

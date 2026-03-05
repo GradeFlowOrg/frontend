@@ -42,6 +42,7 @@ translation: {
         nav: {
           features: "Imkoniyatlar",
           howItWorks: "Qanday ishlaydi",
+          accordion: "FAQ",
           login: "Kirish",
           signup: "Boshlash",
         },
@@ -75,12 +76,34 @@ translation: {
           questionBankTitle: "Savollar banki",
           questionBankDesc: "Savollarni saqlang va keyingi imtihonlarda qayta ishlating.",
         },
+        accordion: {
+          label: "FAQ",
+          title: "Boshlashdan oldin bilishingiz kerak bo'lgan hamma narsa",
+          subtitle: "GradeFlow'dan foydalanayotgan o'qituvchi va o'quvchilar uchun qisqa javoblar.",
+          item1: {
+            question: "O'quvchilar ilova o'rnatishi kerakmi?",
+            answer: "Yo'q. GradeFlow brauzerning o'zida telefon, planshet va noutbukda ishlaydi.",
+          },
+          item2: {
+            question: "Testga vaqt cheklovi qo'yish mumkinmi?",
+            answer: "Ha. Imtihon davomiyligini belgilaysiz va vaqt tugaganda topshirish avtomatik yopiladi.",
+          },
+          item3: {
+            question: "Natijalar qanday hisoblanadi?",
+            answer: "Aniq javobli savollar darhol tekshiriladi, topshirilgandan keyin tahlil ham bir zumda ko'rsatiladi.",
+          },
+          item4: {
+            question: "Eski savollarni qayta ishlatish mumkinmi?",
+            answer: "Ha. Savollarni bankka saqlab, uy vazifasi, quiz yoki imtihonlarda qayta qo'llashingiz mumkin.",
+          },
+        },
         footer: {
           description: "Maktab testlarini bir necha daqiqada onlayn yarating, ulashing va baholang.",
           quickLinks: "Tezkor havolalar",
           home: "Bosh sahifa",
           howItWorks: "Qanday ishlaydi",
           features: "Imkoniyatlar",
+          accordion: "FAQ",
           product: "Mahsulot",
           teacherDashboard: "O'qituvchi paneli",
           studentAccess: "O'quvchi kirishi",
