@@ -55,6 +55,13 @@ export default function Footer() {
             >
               {t("landing.footer.features")}
             </button>
+            <button
+              type="button"
+              onClick={() => scrollToSection("accordion")}
+              className="cursor-pointer text-left hover:text-[#0046FF] dark:hover:text-white"
+            >
+              {t("landing.footer.accordion")}
+            </button>
           </div>
         </div>
 
