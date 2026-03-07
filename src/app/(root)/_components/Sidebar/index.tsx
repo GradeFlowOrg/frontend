@@ -52,9 +52,9 @@ function SidebarTooltip({
   if (!collapsed) return <>{children}</>;
 
   return (
-    <div className="group/tt relative z-[80] flex w-full justify-center">
+    <div className="group/tt relative z-[120] flex w-full justify-center">
       {children}
-      <div className="pointer-events-none absolute left-full top-1/2 z-[90] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-800 opacity-0 shadow-sm transition-opacity duration-150 group-hover/tt:opacity-100 group-focus-within/tt:opacity-100 dark:border-slate-700 dark:bg-[#111827] dark:text-slate-100">
+      <div className="pointer-events-none absolute left-full top-1/2 z-[130] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-800 opacity-0 shadow-sm transition-opacity duration-150 group-hover/tt:opacity-100 group-focus-within/tt:opacity-100 dark:border-slate-700 dark:bg-[#111827] dark:text-slate-100">
         {label}
       </div>
     </div>

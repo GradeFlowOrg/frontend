@@ -4,7 +4,7 @@ import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { ArrowLeft, Eye, EyeOff, House } from "lucide-react";
-import { SignupFormField, signupSchema } from "@/schemas/index";
+import { SignupFormField, signupSchema } from "@/app/(authentication)/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";

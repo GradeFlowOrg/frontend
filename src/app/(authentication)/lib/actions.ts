@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createSession, deleteSession } from "./session";
-import { loginSchema } from "@/schemas";
+import { loginSchema } from "@/app/(authentication)/schemas";
 
 const testUser = {
   id: "1",
