@@ -1,19 +1,19 @@
 ﻿"use client";
 
 import Link from "next/link";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { Bell } from "lucide-react";
+import Notifications from "./Notifications";
 
-import { useMobile } from "@/hooks/useMobile";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/app/(root)/_components/Breadcrumb";
 
 const PAGE_KEY_MAP: Record<string, string> = {
   dashboard: "root.pages.dashboard",
@@ -28,9 +28,9 @@ const PAGE_KEY_MAP: Record<string, string> = {
 };
 
 const Navbar = () => {
-  const isMobile = useMobile();
   const pathname = usePathname();
   const { t } = useTranslation();
+  const notificationsRef = useRef<HTMLDivElement | null>(null);
 
   const crumbs = useMemo(() => {
     const segments = pathname.split("/").filter(Boolean);
@@ -50,13 +50,45 @@ const Navbar = () => {
   }, [pathname, t]);
 
   const pageTitle = crumbs[crumbs.length - 1]?.label ?? t("root.pages.dashboard");
+  const [showNotifications, setShowNotifications] = useState(false);
 
-  if (!isMobile) return null;
+  useEffect(() => {
+    const closeNotifications = () => setShowNotifications(false);
+    closeNotifications();
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!showNotifications) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node | null;
+      if (!target) return;
+
+      if (notificationsRef.current && !notificationsRef.current.contains(target)) {
+        setShowNotifications(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowNotifications(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown, true);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown, true);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showNotifications]);
+
 
   return (
-    <div className="sticky top-0 z-30 w-full">
-      <nav className="border-b border-black/10 bg-white px-4 py-3 dark:border-[#3a3a3a] dark:bg-[#1a1a1a]">
-        <div className="flex items-center justify-between gap-3">
+    <div className="sticky top-0 z-30 w-full md:top-4">
+      <nav className="rounded-none border-b border-black/10 bg-white px-4 py-3 shadow-none dark:border-[#3a3a3a] dark:bg-[#1a1a1a] md:rounded-[28px] md:border md:border-black/10 md:bg-white/85 md:px-5 md:py-4 md:shadow-[0_16px_40px_rgba(15,23,42,0.08)] md:backdrop-blur md:dark:bg-[#1a1a1a]/88 md:dark:shadow-[0_18px_44px_rgba(0,0,0,0.28)]">
+        <div ref={notificationsRef} className="relative flex items-center justify-between gap-3">
           <div className="min-w-0">
             <h1 className="truncate text-lg font-bold text-slate-700 dark:text-white">{pageTitle}</h1>
 
@@ -81,14 +113,19 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <Link
-              href="/notifications"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-black/10 bg-white text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:bg-[#242424] dark:text-slate-300 dark:hover:bg-[#2f2f2f] dark:hover:text-slate-100"
+            <button
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-black/10 bg-white text-slate-700 transition hover:bg-slate-100 md:h-10 md:w-10 md:rounded-xl dark:border-white/10 dark:bg-[#242424] dark:text-slate-300 dark:hover:bg-[#2f2f2f] dark:hover:text-slate-100 cursor-pointer"
               aria-label={t("root.pages.notifications")}
             >
               <Bell className="h-4 w-4" />
-            </Link>
+            </button>
           </div>
+          {showNotifications ? (
+            <div className="absolute -right-1 top-[calc(100%+12px)] z-50">
+              <Notifications />
+            </div>
+          ) : null}
         </div>
       </nav>
     </div>
