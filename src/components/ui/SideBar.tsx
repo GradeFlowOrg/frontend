@@ -368,8 +368,8 @@ export default function SideBar() {
         </div>
       </aside>
 
-      <div className="fixed inset-x-3 bottom-3 z-40 md:hidden">
-        <nav className="rounded-2xl border border-black/10 bg-white/95 p-2 backdrop-blur dark:border-[#3a3a3a] dark:bg-[#1a1a1a]/95">
+      <div className="fixed inset-x-0 bottom-0 z-40 md:hidden">
+        <nav className="border-t border-black/10 bg-white/95 p-2 backdrop-blur dark:border-[#3a3a3a] dark:bg-[#1a1a1a]/95">
           <div className="flex items-stretch gap-1.5">
             {mobilePrimary.map((item) =>
               item.href === "/assignments" ? (

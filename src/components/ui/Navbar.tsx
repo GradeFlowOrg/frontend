@@ -54,8 +54,8 @@ const Navbar = () => {
   if (!isMobile) return null;
 
   return (
-    <div className="sticky top-3 z-30 w-full">
-      <nav className="rounded-2xl border border-black/10 bg-white px-4 py-3 dark:border-[#3a3a3a] dark:bg-[#1a1a1a]">
+    <div className="sticky top-0 z-30 w-full">
+      <nav className="border-b border-black/10 bg-white px-4 py-3 dark:border-[#3a3a3a] dark:bg-[#1a1a1a]">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
             <h1 className="truncate text-lg font-bold text-slate-700 dark:text-white">{pageTitle}</h1>
