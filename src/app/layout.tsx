@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Montserrat, Inter } from "next/font/google";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 import Providers from "./providers";
+import Toaster from "@/components/ui/toaster";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -29,6 +31,7 @@ export default function MainLayout({
         className={`${montserrat.variable} ${inter.variable} antialiased min-h-screen`}
       >
         <Providers>{children}</Providers>
+        <Toaster />
       </body>
     </html>
   );

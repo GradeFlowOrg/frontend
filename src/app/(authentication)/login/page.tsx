@@ -1,11 +1,13 @@
 ﻿"use client";
 
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
-import { ArrowLeft, Eye, EyeOff, House, LoaderCircle } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, LoaderCircle } from "lucide-react";
 import React, { startTransition, useActionState } from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { loginSchema, LoginFormField } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -13,6 +15,9 @@ import { login, type LoginActionState } from "../lib/actions";
 
 export default function LoginPage() {
   const { t } = useTranslation();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const logoutToastShownRef = React.useRef(false);
   const [state, loginAction, isActionPending] = useActionState<LoginActionState, FormData>(
     login,
     { error: null, success: false }
@@ -35,10 +40,20 @@ export default function LoginPage() {
   React.useEffect(() => {
     if (state.error) {
       setError("root", { message: state.error });
+      toast.error(state.error);
     } else if (state.success) {
       clearErrors("root");
+      toast.success(t("auth.login.success"));
+      router.push(state.redirectTo ?? "/dashboard");
     }
-  }, [state, setError, clearErrors]);
+  }, [state, setError, clearErrors, router, t]);
+
+  React.useEffect(() => {
+    if (searchParams.get("logout") !== "1" || logoutToastShownRef.current) return;
+    logoutToastShownRef.current = true;
+    toast.success(t("auth.login.logoutSuccess"));
+    router.replace("/login");
+  }, [searchParams, router, t]);
 
   const onSubmit: SubmitHandler<LoginFormField> = async (data) => {
     clearErrors("root");
@@ -122,11 +137,6 @@ export default function LoginPage() {
             {errors.root && (
               <p className="mt-1 text-xs text-red-600 dark:text-red-400">
                 {errors.root.message}
-              </p>
-            )}
-            {state.success && (
-              <p className="mt-1 text-xs text-green-600 dark:text-green-400">
-                {t("auth.login.success")}
               </p>
             )}
           </div>

@@ -13,11 +13,12 @@ const testUser = {
 export type LoginActionState = {
   error: string | null;
   success: boolean;
+  redirectTo?: string;
 };
 
 export async function login(
   prevState: LoginActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<LoginActionState> {
   const parsed = loginSchema.safeParse({
     identifier: formData.get("identifier"),
@@ -35,11 +36,10 @@ export async function login(
   }
 
   await createSession(testUser.id);
-  redirect("/dashboard");
-  return { error: null, success: true };
+  return { error: null, success: true, redirectTo: "/dashboard" };
 }
 
 export async function logout() {
-    await deleteSession()
-    redirect('/login')
+  await deleteSession();
+  redirect("/login?logout=1");
 }
