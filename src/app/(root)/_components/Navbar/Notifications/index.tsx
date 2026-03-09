@@ -9,6 +9,7 @@ const Notifications = () => {
         className="absolute -top-2 right-4 h-4 w-4 rotate-45 border-l border-t border-slate-200 bg-white dark:border-white/10 dark:bg-[#1f1f1f]"
       />
 
+
       <div className="flex items-start gap-3">
         <div
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white"
