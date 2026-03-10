@@ -19,6 +19,10 @@ translation: {
           homework: "Домашние задания",
           exams: "Экзамены",
         },
+        notifications: {
+          emptyTitle: "Уведомлений нет",
+          emptyDescription: "Здесь будут появляться последние обновления.",
+        },
       },
       sidebar: {
         dashboard: "Панель",
