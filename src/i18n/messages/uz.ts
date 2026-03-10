@@ -19,6 +19,10 @@ translation: {
           homework: "Uy vazifalari",
           exams: "Imtihonlar",
         },
+        notifications: {
+          emptyTitle: "Bildirishnomalar yo'q",
+          emptyDescription: "So'nggi yangilanishlar shu yerda ko'rinadi.",
+        },
       },
       sidebar: {
         dashboard: "Boshqaruv paneli",

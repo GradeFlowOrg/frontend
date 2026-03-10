@@ -19,6 +19,10 @@ translation: {
           homework: "Homework",
           exams: "Exams",
         },
+        notifications: {
+          emptyTitle: "No notifications",
+          emptyDescription: "Recent updates will appear here.",
+        },
       },
       sidebar: {
         dashboard: "Dashboard",
