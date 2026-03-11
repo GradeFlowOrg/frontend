@@ -123,7 +123,7 @@ const Navbar = () => {
           </div>
           {showNotifications ? (
             <div className="absolute -right-1 top-[calc(100%+12px)] z-50">
-              <Notifications />
+              <Notifications onItemClick={() => setShowNotifications(false)} />
             </div>
           ) : null}
         </div>

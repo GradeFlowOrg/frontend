@@ -22,6 +22,7 @@ translation: {
         notifications: {
           emptyTitle: "Bildirishnomalar yo'q",
           emptyDescription: "So'nggi yangilanishlar shu yerda ko'rinadi.",
+          delete: "Bildirishnomani o'chirish",
         },
       },
       sidebar: {
