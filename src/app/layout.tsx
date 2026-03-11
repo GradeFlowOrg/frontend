@@ -31,7 +31,7 @@ export default function MainLayout({
   return (
     <html lang="en" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
       <body
-        className={`${montserrat.variable} ${inter.variable} antialiased min-h-screen`}
+        className={`${montserrat.variable} ${inter.variable} bg-background text-foreground antialiased min-h-screen transition-colors`}
       >
         <Providers>{children}</Providers>
         <Toaster />

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
+import Btn from "@/components/Custom/CustomButton";
 import { ArrowLeft, Eye, EyeOff, House } from "lucide-react";
 import { SignupFormField, signupSchema } from "@/app/(authentication)/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -321,24 +321,24 @@ export default function SignupPage() {
           )}
 
           <div className="flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-between">
-            <Button
+            <Btn
               type="button"
               onClick={prevStep}
               disabled={step === 0 ? true : false}
               className={`mt-0 w-full border border-[#c7d8ff] bg-white text-[#0F2854] hover:bg-[#eef4ff] hover:text-[#0046FF] dark:border-white/15 dark:bg-[#0b1220] dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white sm:w-auto sm:min-w-28 `}
             >
               {t("auth.signup.back")}
-            </Button>
+            </Btn>
 
 
             {step < 2 ? (
-              <Button type="button" onClick={nextStep} className="w-full sm:w-auto sm:min-w-32">
+              <Btn type="button" onClick={nextStep} className="w-full sm:w-auto sm:min-w-32">
                 {t("auth.signup.continue")}
-              </Button>
+              </Btn>
             ) : (
-              <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto sm:min-w-40">
+              <Btn type="submit" disabled={isSubmitting} className="w-full sm:w-auto sm:min-w-40">
                 {isSubmitting ? t("auth.signup.creating") : t("auth.signup.createAccount", { role })}
-              </Button>
+              </Btn>
             )}
           </div>
         </form>

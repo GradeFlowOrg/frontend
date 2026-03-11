@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
+import Btn from "@/components/Custom/CustomButton";
 import { ArrowLeft, Eye, EyeOff, LoaderCircle } from "lucide-react";
 import React, { startTransition, useActionState } from "react";
 import { useTranslation } from "react-i18next";
@@ -152,7 +152,7 @@ export default function LoginPageClient({ logout }: LoginPageClientProps) {
             )}
           </div>
 
-          <Button
+          <Btn
             type="submit"
             className="w-full flex items-center justify-center"
             disabled={isSubmitting || isActionPending}
@@ -162,7 +162,7 @@ export default function LoginPageClient({ logout }: LoginPageClientProps) {
             ) : (
               t("auth.login.submit")
             )}
-          </Button>
+          </Btn>
         </form>
 
         <p className="mt-5 text-center text-sm text-[#355181] dark:text-slate-300">
