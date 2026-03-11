@@ -22,6 +22,7 @@ translation: {
         notifications: {
           emptyTitle: "Уведомлений нет",
           emptyDescription: "Здесь будут появляться последние обновления.",
+          delete: "Удалить уведомление",
         },
       },
       sidebar: {
