@@ -17,15 +17,15 @@ const Notifications = ({ onItemClick }: NotificationsProps) => {
   const [messages, setMessages] = useState<notificationItemsInterface[]>([]);
 
   useEffect(() => {
+
+
     const timer = window.setTimeout(() => {
       setIsLoading(false);
+      window.clearTimeout(timer);
     }, 1000);
 
-   
-
     return () => {
-      window.clearTimeout(timer);
-      setMessages(notificationItems.filter(e => e.unread));
+      setMessages(notificationItems.filter((item) => item.unread));
     };
   }, []);
 
