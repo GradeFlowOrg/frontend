@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { Bell } from "lucide-react";
 import Notifications from "./Notifications";
+import Profile from "./Profile";
 
 import {
   Breadcrumb,
@@ -13,7 +14,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/app/(root)/_components/Breadcrumb";
+} from "@/app/(root)/_components/Navbar/Breadcrumb";
 
 const PAGE_KEY_MAP: Record<string, string> = {
   dashboard: "root.pages.dashboard",
@@ -120,10 +121,13 @@ const Navbar = () => {
             >
               <Bell className="h-4 w-4" />
             </button>
+            <Profile />
           </div>
           {showNotifications ? (
             <div className="absolute -right-1 top-[calc(100%+12px)] z-50">
-              <Notifications onItemClick={() => setShowNotifications(false)} />
+              <div className="flex gap-3 items-center justify-center">
+                <Notifications onItemClick={() => setShowNotifications(false)} />
+              </div>
             </div>
           ) : null}
         </div>

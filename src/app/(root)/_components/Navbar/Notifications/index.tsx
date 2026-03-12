@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Inbox } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { notificationItems } from "../../../_constants/index";
 import Link from "next/link";
-import { notificationItemsInterface } from "../../../_types/index";
 
 type NotificationsProps = {
   onItemClick?: () => void;
@@ -14,18 +13,15 @@ type NotificationsProps = {
 const Notifications = ({ onItemClick }: NotificationsProps) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [messages, setMessages] = useState<notificationItemsInterface[]>([]);
+  const unreadMessages = useMemo(() => notificationItems.filter((item) => item.unread), []);
 
   useEffect(() => {
-
-
     const timer = window.setTimeout(() => {
       setIsLoading(false);
-      window.clearTimeout(timer);
     }, 1000);
 
     return () => {
-      setMessages(notificationItems.filter((item) => item.unread));
+      window.clearTimeout(timer);
     };
   }, []);
 
@@ -53,9 +49,9 @@ const Notifications = ({ onItemClick }: NotificationsProps) => {
           </div>
 
         </div>
-      ) : messages.length > 0 ? (
+      ) : unreadMessages.length > 0 ? (
         <div className="space-y-3 max-[350px]:space-y-2.5">
-          {messages.map((item) => (
+          {unreadMessages.map((item) => (
             <div
               key={item.id}
               className="rounded-xl border cursor-pointer border-slate-200/80 bg-slate-50/70 p-3 max-[350px]:rounded-lg max-[350px]:p-2.5 dark:border-white/10 dark:bg-white/5"
@@ -64,15 +60,15 @@ const Notifications = ({ onItemClick }: NotificationsProps) => {
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
                     <p className="truncate text-sm font-semibold text-slate-900 max-[350px]:text-xs dark:text-white">
-                      {item.title}
+                      {t(item.title)}
                     </p>
                     {item.unread ? <span className="h-2 w-2 shrink-0 rounded-full bg-[#0046FF]" /> : null}
                   </div>
                   <p className="mt-1 text-sm text-slate-500 max-w-full truncate max-[350px]:text-xs dark:text-slate-300">
-                    {item.description}
+                    {t(item.description)}
                   </p>
                 </div>
-                <span className="shrink-0 text-xs text-slate-400 dark:text-slate-500">{item.timestamp}</span>
+                <span className="shrink-0 text-xs text-slate-400 dark:text-slate-500">{t(item.timestamp)}</span>
               </Link>
             </div>
           ))}

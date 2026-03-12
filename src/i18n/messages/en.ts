@@ -23,6 +23,26 @@ translation: {
           emptyTitle: "No notifications",
           emptyDescription: "Recent updates will appear here.",
           delete: "Delete notification",
+          unread: "Unread",
+          read: "Read",
+          close: "Close",
+          items: {
+            newMessage: {
+              title: "New message",
+              description: "You have received a new message from John.",
+              timestamp: "2 hours ago",
+            },
+            serverAlert: {
+              title: "Server alert",
+              description: "Server CPU usage has exceeded 90%.",
+              timestamp: "1 hour ago",
+            },
+            policyUpdate: {
+              title: "Policy update",
+              description: "A long policy update is available. Open the notification to read the full details.",
+              timestamp: "1 hour ago",
+            },
+          },
         },
       },
       sidebar: {

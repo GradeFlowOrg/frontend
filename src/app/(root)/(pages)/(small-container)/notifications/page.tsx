@@ -61,13 +61,13 @@ const Page = () => {
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h2 className="truncate text-sm font-semibold text-slate-900 dark:text-white">{item.title}</h2>
+                <h2 className="truncate text-sm font-semibold text-slate-900 dark:text-white">{t(item.title)}</h2>
                 {item.unread ? <span className="h-2 w-2 shrink-0 rounded-full bg-[#0046FF]" /> : null}
               </div>
-              <p className="mt-1 max-w-full truncate text-sm leading-6 text-slate-500 dark:text-slate-300">{item.description}</p>
+              <p className="mt-1 max-w-full truncate text-sm leading-6 text-slate-500 dark:text-slate-300">{t(item.description)}</p>
             </div>
             <div className="flex shrink-0 items-center gap-2">
-              <span className="text-xs font-medium text-slate-400 dark:text-slate-500">{item.timestamp}</span>
+              <span className="text-xs font-medium text-slate-400 dark:text-slate-500">{t(item.timestamp)}</span>
               <button
                 type="button"
                 onClick={(event) => {
@@ -123,7 +123,7 @@ const Page = () => {
                     transition={{ delay: 0.18, duration: 0.22 }}
                     className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0046FF] dark:text-[#8fb0ff]"
                   >
-                    Unread
+                    {t("root.notifications.unread")}
                   </motion.p>
                 </div>
                 {unreadMessages.map((item) => renderNotificationCard(item, "unread"))}
@@ -150,7 +150,7 @@ const Page = () => {
                     transition={{ delay: 0.24, duration: 0.22 }}
                     className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400"
                   >
-                    Read
+                    {t("root.notifications.read")}
                   </motion.p>
                 </div>
                 {readMessages.map((item) => renderNotificationCard(item, "read"))}
@@ -176,13 +176,13 @@ const Page = () => {
       }}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{selectedNotification?.title}</AlertDialogTitle>
+            <AlertDialogTitle>{selectedNotification ? t(selectedNotification.title) : null}</AlertDialogTitle>
             <AlertDialogDescription>
-              {selectedNotification?.description}
+              {selectedNotification ? t(selectedNotification.description) : null}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("root.notifications.close")}</AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

@@ -23,6 +23,26 @@ translation: {
           emptyTitle: "Bildirishnomalar yo'q",
           emptyDescription: "So'nggi yangilanishlar shu yerda ko'rinadi.",
           delete: "Bildirishnomani o'chirish",
+          unread: "O'qilmagan",
+          read: "O'qilgan",
+          close: "Yopish",
+          items: {
+            newMessage: {
+              title: "Yangi xabar",
+              description: "Siz Jondan yangi xabar oldingiz.",
+              timestamp: "2 soat oldin",
+            },
+            serverAlert: {
+              title: "Server ogohlantirishi",
+              description: "Server CPU yuklanishi 90% dan oshdi.",
+              timestamp: "1 soat oldin",
+            },
+            policyUpdate: {
+              title: "Qoidalar yangilandi",
+              description: "Uzun qoidalar yangilanishi mavjud. Batafsil o'qish uchun bildirishnomani oching.",
+              timestamp: "1 soat oldin",
+            },
+          },
         },
       },
       sidebar: {
