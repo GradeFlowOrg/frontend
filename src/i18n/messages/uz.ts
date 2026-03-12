@@ -13,6 +13,100 @@ translation: {
           title: "Hozircha hech narsa yo'q",
           description: "Hozir ko'rsatish uchun kontent yo'q. Keyinroq yangi elementlar shu yerda paydo bo'ladi.",
         },
+        settings: {
+          title: "Ish usulingizga mos sozlamalar",
+          description: "Ko'rinish, xavfsizlik va yordam bo'limlarini bitta joydan boshqaring. Sahifa yirik platformalardagi kabi tuzildi: ma'noga ko'ra bo'limlar, qisqa izohlar va xavfli amallarni alohida ajratish.",
+          actions: {
+            manage: "Boshqarish",
+            recommended: "Tavsiya etiladi",
+            review: "Ko'rish",
+            open: "Ochish",
+            logout: "Chiqish",
+            enabled: "Yoqilgan",
+            update: "Yangilash",
+            delete: "O'chirish",
+            send: "Yuborish",
+            share: "Ulashish",
+            contact: "Bog'lanish",
+            readDocs: "O'qish",
+          },
+          appearance: {
+            title: "Ko'rinish",
+            description: "Butun boshqaruv paneli interfeysini boshqaradi.",
+            themeLabel: "Mavzu",
+            themeHelp: "Doimiy mavzuni tanlang yoki tizim sozlamasiga ergashing.",
+            fontLabel: "Shrift oilasi",
+            fontHelp: "Bu saytda mavjud bo'lgan barcha shriftlar orasidan tanlang.",
+            motionTitle: "Harakatni kamaytirish",
+            motionDescription: "Tinchroq va qulayroq tajriba uchun animatsiya va o'tishlarni kamaytiring.",
+            themes: {
+              light: "Yorug'",
+              dark: "Qorong'i",
+              system: "Tizim",
+            },
+            fonts: {
+              inter: "Inter",
+              geist: "Geist",
+              montserrat: "Montserrat",
+            },
+          },
+          security: {
+            title: "Hisob va xavfsizlik",
+            description: "Autentifikatsiya va hisob himoyasi sozlamalari.",
+            changePassword: {
+              title: "Parolni almashtirish",
+              description: "Hisob xavfsizligi uchun kirish parolingizni muntazam yangilab turing.",
+            },
+            twoFactor: {
+              title: "Ikki bosqichli tasdiqlash (2FA)",
+              description: "Yangi qurilmadan kirganda qo'shimcha tasdiqlash bosqichini yoqing.",
+            },
+            activeSessions: {
+              title: "Faol sessiyalar",
+              description: "Hozir qaysi qurilmalarda kirilganini ko'ring.",
+            },
+            loginHistory: {
+              title: "Kirish tarixi",
+              description: "So'nggi kirish urinishlari va shubhali faollikni tekshiring.",
+            },
+            logoutAllDevices: {
+              title: "Barcha qurilmalardan chiqish",
+              description: "Boshqa barcha faol sessiyalarni darhol yopib qo'ying.",
+            },
+            securityAlerts: {
+              title: "Xavfsizlik ogohlantirishlari",
+              description: "Xavfli kirishlar va muhim hisob o'zgarishlari haqida bildirishnomalar oling.",
+            },
+            recoveryEmail: {
+              title: "Tiklash emaili",
+              description: "Parolni tiklash uchun zaxira email manzilini tayyor tuting.",
+            },
+            deleteAccount: {
+              title: "Hisobni o'chirish",
+              description: "Hisob va unga bog'liq barcha ma'lumotlarni butunlay o'chiring.",
+            },
+          },
+          support: {
+            title: "Yordam / Fikr-mulohaza",
+            description: "Erta bosqichdagi mahsulotlar va tezkor fikr bildirish uchun foydali bo'lim.",
+            reportBug: {
+              title: "Xato haqida xabar berish",
+              description: "Biror narsa ishlamay qolsa yoki noto'g'ri ishlasa, tezkor xabar yuboring.",
+            },
+            requestFeature: {
+              title: "Funksiya so'rash",
+              description: "Mahsulot g'oyalari va ish jarayonini yaxshilash takliflarini ulashing.",
+            },
+            contactSupport: {
+              title: "Yordam bilan bog'lanish",
+              description: "Hisob, to'lov yoki texnik yordam bo'yicha jamoa bilan to'g'ridan-to'g'ri bog'laning.",
+            },
+            documentation: {
+              title: "Hujjatlar",
+              description: "Qo'llanmalar, yo'riqnomalar va mahsulotdan foydalanish materiallarini oching.",
+            },
+          },
+        },
         pages: {
           dashboard: "Boshqaruv paneli",
           classes: "Sinflar",
