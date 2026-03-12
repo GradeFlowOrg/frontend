@@ -13,6 +13,100 @@ translation: {
           title: "Nothing here yet",
           description: "There is no content to show right now. New items will appear here later.",
         },
+        settings: {
+          title: "Preferences that fit the way you work",
+          description: "Manage appearance, security, and support options from one place. The layout follows grouped settings patterns used by major platforms: clear sections, short descriptions, and safe separation of destructive actions.",
+          actions: {
+            manage: "Manage",
+            recommended: "Recommended",
+            review: "Review",
+            open: "Open",
+            logout: "Log out",
+            enabled: "Enabled",
+            update: "Update",
+            delete: "Delete",
+            send: "Send",
+            share: "Share",
+            contact: "Contact",
+            readDocs: "Read",
+          },
+          appearance: {
+            title: "Appearance",
+            description: "Controls the overall UI experience across the dashboard.",
+            themeLabel: "Theme",
+            themeHelp: "Choose a fixed theme or follow the system preference.",
+            fontLabel: "Font family",
+            fontHelp: "Switch between all font families currently loaded in this website.",
+            motionTitle: "Reduced motion",
+            motionDescription: "Limit interface animation and transitions for a calmer, more accessible experience.",
+            themes: {
+              light: "Light",
+              dark: "Dark",
+              system: "System",
+            },
+            fonts: {
+              inter: "Inter",
+              geist: "Geist",
+              montserrat: "Montserrat",
+            },
+          },
+          security: {
+            title: "Account & Security",
+            description: "Authentication and account protection settings.",
+            changePassword: {
+              title: "Change password",
+              description: "Update your sign-in password regularly to keep your account secure.",
+            },
+            twoFactor: {
+              title: "Two-Factor Authentication (2FA)",
+              description: "Add an extra verification step when signing in from a new device.",
+            },
+            activeSessions: {
+              title: "Active sessions",
+              description: "See which devices are currently signed in to your account.",
+            },
+            loginHistory: {
+              title: "Login history",
+              description: "Review recent sign-in attempts and suspicious access activity.",
+            },
+            logoutAllDevices: {
+              title: "Logout from all devices",
+              description: "Immediately sign out from every other active session.",
+            },
+            securityAlerts: {
+              title: "Security alerts",
+              description: "Receive notifications about risky sign-ins and critical account changes.",
+            },
+            recoveryEmail: {
+              title: "Recovery email",
+              description: "Keep a backup email address ready for password recovery.",
+            },
+            deleteAccount: {
+              title: "Delete account",
+              description: "Permanently remove your account and all associated data.",
+            },
+          },
+          support: {
+            title: "Support / Feedback",
+            description: "Helpful tools for early products and fast feedback loops.",
+            reportBug: {
+              title: "Report bug",
+              description: "Send a quick issue report when something breaks or behaves unexpectedly.",
+            },
+            requestFeature: {
+              title: "Request feature",
+              description: "Share product ideas and workflow improvements you want to see next.",
+            },
+            contactSupport: {
+              title: "Contact support",
+              description: "Reach the team directly for account, billing, or technical help.",
+            },
+            documentation: {
+              title: "Documentation",
+              description: "Open setup notes, guides, and product usage references.",
+            },
+          },
+        },
         pages: {
           dashboard: "Dashboard",
           classes: "Classes",
