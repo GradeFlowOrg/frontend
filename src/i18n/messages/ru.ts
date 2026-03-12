@@ -9,6 +9,10 @@ translation: {
       },
       root: {
         navbarTitle: "GradeFlow",
+        empty: {
+          title: "Пока ничего нет",
+          description: "Сейчас здесь нечего показывать. Новые элементы появятся позже.",
+        },
         pages: {
           dashboard: "Панель",
           classes: "Классы",
@@ -23,6 +27,26 @@ translation: {
           emptyTitle: "Уведомлений нет",
           emptyDescription: "Здесь будут появляться последние обновления.",
           delete: "Удалить уведомление",
+          unread: "Непрочитанные",
+          read: "Прочитанные",
+          close: "Закрыть",
+          items: {
+            newMessage: {
+              title: "Новое сообщение",
+              description: "Вы получили новое сообщение от Джона.",
+              timestamp: "2 часа назад",
+            },
+            serverAlert: {
+              title: "Предупреждение сервера",
+              description: "Загрузка CPU сервера превысила 90%.",
+              timestamp: "1 час назад",
+            },
+            policyUpdate: {
+              title: "Обновление правил",
+              description: "Доступно длинное обновление правил. Откройте уведомление, чтобы прочитать подробности.",
+              timestamp: "1 час назад",
+            },
+          },
         },
       },
       sidebar: {
