@@ -9,6 +9,10 @@ translation: {
       },
       root: {
         navbarTitle: "GradeFlow",
+        empty: {
+          title: "Hozircha hech narsa yo'q",
+          description: "Hozir ko'rsatish uchun kontent yo'q. Keyinroq yangi elementlar shu yerda paydo bo'ladi.",
+        },
         pages: {
           dashboard: "Boshqaruv paneli",
           classes: "Sinflar",

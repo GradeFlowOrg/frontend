@@ -3,13 +3,8 @@
 import { redirect } from "next/navigation";
 import { createSession, deleteSession } from "./session";
 import { loginSchema } from "@/app/(authentication)/schemas";
-
-const testUser = {
-  id: "1",
-  identifier: "abdulaziz",
-  password: "123456",
-};
-
+import { testUser } from '@/constants/index'
+ 
 export type LoginActionState = {
   error: string | null;
   success: boolean;

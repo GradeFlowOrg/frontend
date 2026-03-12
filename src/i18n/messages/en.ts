@@ -9,6 +9,10 @@ translation: {
       },
       root: {
         navbarTitle: "GradeFlow",
+        empty: {
+          title: "Nothing here yet",
+          description: "There is no content to show right now. New items will appear here later.",
+        },
         pages: {
           dashboard: "Dashboard",
           classes: "Classes",
