@@ -24,8 +24,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { Row } from "./_components/Row";
 import { SectionCard } from "./_components/SectionCard";
-
-type ThemeOption = "light" | "dark" | "system";
+import { ThemeOption } from '../../../_types/index'
+import { toast } from "react-toastify";
 
 const entryEase = [0.22, 1, 0.36, 1] as const;
 
@@ -122,7 +122,7 @@ export default function Settings() {
             icon={KeyRound}
             title={t("root.settings.security.changePassword.title")}
             description={t("root.settings.security.changePassword.description")}
-            action={<button type="button" className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.manage")}</button>}
+            action={<button type="button" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.manage")}</button>}
           />
           <Row
             icon={ShieldEllipsis}
@@ -134,7 +134,7 @@ export default function Settings() {
             icon={History}
             title={t("root.settings.security.loginHistory.title")}
             description={t("root.settings.security.loginHistory.description")}
-            action={<button type="button" className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.open")}</button>}
+            action={<button type="button" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.open")}</button>}
           />
           <Row
             icon={BellRing}
@@ -147,7 +147,7 @@ export default function Settings() {
             danger
             title={t("root.settings.security.deleteAccount.title")}
             description={t("root.settings.security.deleteAccount.description")}
-            action={<button type="button" className="rounded-xl bg-red-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-red-700">{t("root.settings.actions.delete")}</button>}
+            action={<button onClick={(e) => { e.preventDefault(); toast.error('unable to delete an account'); }} type="button" className="cursor-pointer rounded-xl bg-red-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-red-700">{t("root.settings.actions.delete")}</button>}
           />
         </SectionCard>
       </motion.div>
@@ -162,25 +162,25 @@ export default function Settings() {
             icon={Bug}
             title={t("root.settings.support.reportBug.title")}
             description={t("root.settings.support.reportBug.description")}
-            action={<button type="button" className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.send")}</button>}
+            action={<button type="button" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.send")}</button>}
           />
           <Row
             icon={Palette}
             title={t("root.settings.support.requestFeature.title")}
             description={t("root.settings.support.requestFeature.description")}
-            action={<button type="button" className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.share")}</button>}
+            action={<button type="button" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.share")}</button>}
           />
           <Row
             icon={Mail}
             title={t("root.settings.support.contactSupport.title")}
             description={t("root.settings.support.contactSupport.description")}
-            action={<a href="mailto:support@gradeflow.app" className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.contact")}</a>}
+            action={<a href="mailto:support@gradeflow.app" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.contact")}</a>}
           />
           <Row
             icon={BookOpenText}
             title={t("root.settings.support.documentation.title")}
             description={t("root.settings.support.documentation.description")}
-            action={<Link href="/" className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.readDocs")}</Link>}
+            action={<Link href="/" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.readDocs")}</Link>}
           />
         </SectionCard>
       </motion.div>
