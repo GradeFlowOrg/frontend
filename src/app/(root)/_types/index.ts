@@ -5,3 +5,5 @@ export interface notificationItemsInterface {
   timestamp: string;
   unread: boolean;
 }
+
+export type ThemeOption = "light" | "dark" | "system";
