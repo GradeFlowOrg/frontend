@@ -12,7 +12,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import type { LanguageSwitcherProps } from "@/types";
+export type LanguageSwitcherProps = {
+  compact?: boolean;
+};
 
 
 
