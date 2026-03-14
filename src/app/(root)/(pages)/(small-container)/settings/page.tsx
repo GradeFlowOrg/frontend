@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
-import { motion, type Variants } from "motion/react";
+import { motion } from "motion/react";
 import {
   BellRing,
   BookOpenText,
@@ -22,38 +22,22 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Row } from "./_components/Row";
-import { SectionCard } from "./_components/SectionCard";
+import { Row } from "../../_components/Row";
+import { SectionCard } from "../../_components/SectionCard";
 import { ThemeOption } from '../../../_types/index'
 import { toast } from "react-toastify";
+import {
+  containerVariants,
+  itemVariants,
+} from '../../_constants/index'
 
-const entryEase = [0.22, 1, 0.36, 1] as const;
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.04,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.36, ease: entryEase },
-  },
-};
 
 export default function Settings() {
   const { t } = useTranslation();
   const { resolvedTheme, theme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(
-    () => () => {},
+    () => () => { },
     () => true,
     () => false
   );
@@ -94,11 +78,10 @@ export default function Settings() {
                     key={value}
                     type="button"
                     onClick={() => setTheme(value)}
-                    className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-left transition ${
-                      active
-                        ? "border-[#0046FF] bg-[#eaf1ff] text-[#0046FF] dark:bg-[#1b2a4a] dark:text-[#9fb8ff]"
-                        : "border-slate-200 bg-slate-50/80 text-slate-700 hover:border-slate-300 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
-                    }`}
+                    className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-left transition ${active
+                      ? "border-[#0046FF] bg-[#eaf1ff] text-[#0046FF] dark:bg-[#1b2a4a] dark:text-[#9fb8ff]"
+                      : "border-slate-200 bg-slate-50/80 text-slate-700 hover:border-slate-300 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+                      }`}
                   >
                     <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/80 dark:bg-black/15">
                       <Icon className="h-4 w-4" />

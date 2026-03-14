@@ -8,10 +8,10 @@ import { ArrowLeft, Eye, EyeOff, LoaderCircle } from "lucide-react";
 import React, { startTransition, useActionState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { loginSchema, LoginFormField } from "@/app/(authentication)/schemas/index";
+import { loginSchema, LoginFormField } from "@/app/(authentication)/_schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { login, type LoginActionState } from "../lib/actions";
+import { login, type LoginActionState } from "../../_lib/actions";
 
 type LoginPageClientProps = {
   logout?: string;

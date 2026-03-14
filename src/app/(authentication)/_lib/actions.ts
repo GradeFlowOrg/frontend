@@ -2,8 +2,8 @@
 
 import { redirect } from "next/navigation";
 import { createSession, deleteSession } from "./session";
-import { loginSchema } from "@/app/(authentication)/schemas";
-import { testUser } from '@/constants/index'
+import { loginSchema } from "@/app/(authentication)/_schemas";
+import { testUsers } from '@/app/(authentication)/_constants/index'
  
 export type LoginActionState = {
   error: string | null;
@@ -26,11 +26,16 @@ export async function login(
 
   const { identifier, password } = parsed.data;
 
-  if (identifier !== testUser.identifier || password !== testUser.password) {
+  const matchedUser = testUsers.find(user => user.identifier === identifier);
+  if (!matchedUser) {
     return { error: "Invalid username/email or password.", success: false };
   }
 
-  await createSession(testUser.id);
+  if(matchedUser.password !== password){
+    return { error: "Invalid username/email or password.", success: false };
+  }
+
+  await createSession(matchedUser.id);
   return { error: null, success: true, redirectTo: "/dashboard" };
 }
 

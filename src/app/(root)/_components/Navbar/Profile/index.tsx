@@ -1,10 +1,8 @@
-import Link from "next/link";
-import React from "react";
-import { UserRound } from "lucide-react";
+'use client'
+import Link from "next/link";import { UserRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { testUser } from '@/constants/index'
 
-const Profile = () => {
+const Profile = ({ userName }: { userName?: string | null }) => {
   const { t } = useTranslation();
 
   return (
@@ -16,7 +14,7 @@ const Profile = () => {
       <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-black/10 bg-white text-slate-700 transition hover:bg-slate-100 md:h-10 md:w-10 md:rounded-xl dark:border-white/10 dark:bg-[#242424] dark:text-slate-300 dark:hover:bg-[#2f2f2f] dark:hover:text-slate-100">
         <UserRound className="h-4 w-4" />
       </span>
-      <span className="hidden text-sm font-semibold md:inline">{testUser.name}</span>
+      <span className="hidden text-sm font-semibold md:inline">{userName ?? t("root.pages.profile")}</span>
     </Link>
   );
 };

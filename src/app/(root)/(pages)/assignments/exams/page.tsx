@@ -1,13 +1,9 @@
-﻿"use client";
+import Empty from "../../_components/Empty";
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-
-const Page = () => {
-  const { t } = useTranslation();
-
-  return <div>{t("root.pages.exams")}</div>;
-};
-
-export default Page;
-
+export default function Page() {
+  return (
+    <div className="flex min-h-[calc(100dvh-12rem)] w-full items-center justify-center">
+      <Empty />
+    </div>
+  );
+}
