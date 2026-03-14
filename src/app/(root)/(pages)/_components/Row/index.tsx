@@ -18,13 +18,13 @@ export function Row({
 }) {
   return (
     <div
-      className={`flex flex-col gap-4 rounded-2xl border p-4 md:flex-row md:items-center md:justify-between ${
+      className={`grid gap-4 rounded-2xl border p-4 sm:p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center ${
         danger
           ? "border-red-200 bg-red-50/70 dark:border-red-500/20 dark:bg-red-500/10"
           : "border-slate-200/80 bg-slate-50/70 dark:border-white/10 dark:bg-white/5"
       }`}
     >
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-3 min-w-0">
         <div
           className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
             danger
@@ -39,7 +39,11 @@ export function Row({
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-300">{description}</p>
         </div>
       </div>
-      {action ? <div className="shrink-0">{action}</div> : null}
+      {action ? (
+        <div className="flex w-full md:w-auto md:justify-end [&>*]:inline-flex [&>*]:min-h-11 [&>*]:w-full [&>*]:items-center [&>*]:justify-center md:[&>*]:w-auto">
+          {action}
+        </div>
+      ) : null}
     </div>
   );
 }

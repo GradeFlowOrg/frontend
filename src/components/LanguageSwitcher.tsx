@@ -12,10 +12,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import type { LanguageSwitcherProps } from "@/types";
-
-
-
+export type LanguageSwitcherProps = {
+  compact?: boolean;
+};
 export default function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
   const { i18n, t } = useTranslation();
   const mounted = useSyncExternalStore(
@@ -33,11 +32,15 @@ export default function LanguageSwitcher({ compact = false }: LanguageSwitcherPr
   return (
     <div className={`inline-flex items-center gap-2 ${compact ? "justify-center" : ""}`}>
       {!compact ? (
-        <span className="text-xs font-medium text-slate-600 dark:text-slate-300">{t("language.shortLabel")}</span>
+        <span className="text-xs font-medium text-slate-600 dark:text-slate-300">{t("language.label")}</span>
       ) : null}
       <Select
         value={supportedLanguages.includes(currentLanguage) ? currentLanguage : "en"}
         onValueChange={(value) => {
+          if (!supportedLanguages.includes(value as AppLanguage)) {
+            return;
+          }
+
           window.localStorage.setItem("gf-language", value);
           void i18n.changeLanguage(value);
         }}

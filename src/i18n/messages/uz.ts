@@ -10,8 +10,14 @@ translation: {
       root: {
         navbarTitle: "GradeFlow",
         empty: {
-          title: "Hozircha hech narsa yo'q",
-          description: "Hozir ko'rsatish uchun kontent yo'q. Keyinroq yangi elementlar shu yerda paydo bo'ladi.",
+          title: "Hozircha bo'sh",
+          description: "Bitta amal bilan boshlang.",
+          actions: {
+            joinClass: "Sinfga qo'shilish",
+            joinSchool: "Maktabga qo'shilish",
+            createClass: "Sinf yaratish",
+            createSchool: "Maktab yaratish",
+          },
         },
         settings: {
           title: "Ish usulingizga mos sozlamalar",

@@ -1,31 +1,36 @@
+"use client";
+
 import React, { type ReactNode } from "react";
-import { Inbox } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import EmptyArtwork from "./Artwork";
 
 type EmptyProps = {
   title?: string;
   description?: string;
   icon?: ReactNode;
   className?: string;
+  action?: ReactNode;
 };
 
-const Empty = ({ title, description, icon, className = "" }: EmptyProps) => {
+const Empty = ({ title, description, icon, className = "", action }: EmptyProps) => {
   const { t } = useTranslation();
 
   return (
     <div
-      className={`flex w-full max-w-md flex-col items-center text-center shadow-[0_18px_45px_rgba(15,23,42,0.08)] ${className}`}
+      className={`relative mx-auto flex w-full max-w-lg flex-col items-center overflow-hidden rounded-[32px] border border-slate-200/80 bg-[radial-gradient(circle_at_top,#f8fbff,white_55%)] px-6 py-8 text-center shadow-[0_24px_70px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[radial-gradient(circle_at_top,#20263a,#171717_55%)] ${className}`}
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0046FF] text-white shadow-[0_12px_28px_rgba(0,70,255,0.28)]">
-        {icon ?? <Inbox className="h-6 w-6" />}
+      <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(0,70,255,0.12),transparent_65%)] dark:bg-[radial-gradient(circle_at_top,rgba(120,156,255,0.14),transparent_65%)]" />
+      <div className="relative">
+        {icon ?? <EmptyArtwork />}
       </div>
 
-      <h2 className="mt-5 text-lg font-semibold text-slate-900 dark:text-white">
+      <h2 className="mt-3 text-xl font-semibold tracking-tight text-slate-900 dark:text-white">
         {title ?? t("root.empty.title")}
       </h2>
-      <p className="mt-2 max-w-sm text-sm leading-6 text-slate-500 dark:text-slate-300">
+      <p className="mt-2 max-w-xs text-sm leading-6 text-slate-500 dark:text-slate-300">
         {description ?? t("root.empty.description")}
       </p>
+      {action ? <div className="relative mt-6 w-full max-w-[220px]">{action}</div> : null}
     </div>
   );
 };

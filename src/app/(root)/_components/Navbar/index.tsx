@@ -18,7 +18,7 @@ import {
 
 const PAGE_KEY_MAP: Record<string, string> = {
   dashboard: "root.pages.dashboard",
-  classes: "root.pages.classes",
+  groups: "root.pages.classes",
   school: "root.pages.school",
   notifications: "root.pages.notifications",
   profile: "root.pages.profile",
@@ -28,7 +28,7 @@ const PAGE_KEY_MAP: Record<string, string> = {
   exams: "root.pages.exams",
 };
 
-const Navbar = () => {
+const Navbar = ({ userName }: { userName?: string | null }) => {
   const pathname = usePathname();
   const { t } = useTranslation();
   const notificationsRef = useRef<HTMLDivElement | null>(null);
@@ -128,7 +128,7 @@ const Navbar = () => {
                 </div>
               ) : null}
             </div>
-            <Profile />
+            <Profile userName={userName} />
           </div>
         </div>
       </nav>

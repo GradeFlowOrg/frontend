@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { decrypt } from './app/(authentication)/lib/session';
-import { protectedRoutes } from "./constants";
-import { publicRoutes } from "./constants";
+import { decrypt } from './app/(authentication)/_lib/session';
+import { protectedRoutes } from "./app/(authentication)/_constants";
+import { publicRoutes } from "./app/(authentication)/_constants";
 
 export default async function proxy(req: NextRequest){
     const path = req.nextUrl.pathname;

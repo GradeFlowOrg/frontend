@@ -10,8 +10,14 @@ translation: {
       root: {
         navbarTitle: "GradeFlow",
         empty: {
-          title: "Пока ничего нет",
-          description: "Сейчас здесь нечего показывать. Новые элементы появятся позже.",
+          title: "Пока пусто",
+          description: "Начните с одного действия.",
+          actions: {
+            joinClass: "Присоединиться к классу",
+            joinSchool: "Присоединиться к школе",
+            createClass: "Создать класс",
+            createSchool: "Создать школу",
+          },
         },
         settings: {
           title: "Настройки под ваш рабочий процесс",

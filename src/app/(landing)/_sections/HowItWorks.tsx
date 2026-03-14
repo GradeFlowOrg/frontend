@@ -5,7 +5,7 @@ import { ChartNoAxesCombined, Share2, ShieldCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion, useReducedMotion } from "motion/react";
 
-import LiquidCard from "../../../components/cards/LiquidCard";
+import LiquidCard from "../_components/cards/LiquidCard";
 
 export default function HowItWorks() {
   const { t } = useTranslation();

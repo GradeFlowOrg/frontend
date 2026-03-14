@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { logout } from '@/app/(authentication)/lib/actions'
+import { logout } from '@/app/(authentication)/_lib/actions'
 import {
   Bell,
   ChevronDown,
@@ -20,7 +20,7 @@ import {
   UserRound,
   type LucideIcon
 } from "lucide-react";
-import { NavItem } from "@/types";
+import { NavItem } from "../../_types/index";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,7 +54,7 @@ function SidebarTooltip({
   return (
     <div className="group/tt relative z-[120] flex w-full justify-center">
       {children}
-      <div className="pointer-events-none absolute left-full top-1/2 z-[130] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-800 opacity-0 shadow-sm transition-opacity duration-150 group-hover/tt:opacity-100 group-focus-within/tt:opacity-100 dark:border-slate-700 dark:bg-[#111827] dark:text-slate-100">
+      <div className="pointer-events-none absolute left-full top-1/2 z-[130] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-800 opacity-0 shadow-sm transition-opacity duration-150 group-hover/tt:opacity-100 dark:border-slate-700 dark:bg-[#111827] dark:text-slate-100">
         {label}
       </div>
     </div>
@@ -147,7 +147,7 @@ export default function SideBar() {
   const assignmentsActive = pathname.startsWith("/assignments");
   const topItems: NavItem[] = [
     { href: "/dashboard", label: t("sidebar.dashboard"), icon: House },
-    { href: "/classes", label: t("sidebar.classes"), icon: GraduationCap },
+    { href: "/groups", label: t("sidebar.classes"), icon: GraduationCap },
     { href: "/school", label: t("sidebar.school"), icon: School },
     { href: "/notifications", label: t("sidebar.notifications"), icon: Bell },
   ];
@@ -164,7 +164,7 @@ export default function SideBar() {
 
   const mobilePrimary: NavItem[] = [
     { href: "/dashboard", label: t("sidebar.dashboard"), icon: House },
-    { href: "/classes", label: t("sidebar.classes"), icon: GraduationCap },
+    { href: "/groups", label: t("sidebar.classes"), icon: GraduationCap },
     { href: "/school", label: t("sidebar.school"), icon: School },
     { href: "/assignments", label: t("sidebar.assignments"), icon: NotebookPen },
   ];

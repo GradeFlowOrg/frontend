@@ -11,7 +11,13 @@ translation: {
         navbarTitle: "GradeFlow",
         empty: {
           title: "Nothing here yet",
-          description: "There is no content to show right now. New items will appear here later.",
+          description: "Start with one action.",
+          actions: {
+            joinClass: "Join class",
+            joinSchool: "Join school",
+            createClass: "Create class",
+            createSchool: "Create school",
+          },
         },
         settings: {
           title: "Preferences that fit the way you work",

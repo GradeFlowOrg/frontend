@@ -1,9 +1,9 @@
-import React from 'react'
+import Empty from "../_components/Empty";
 
-const Documentation = () => {
+export default function Documentation() {
   return (
-    <div>Documentation</div>
-  )
+    <div className="flex min-h-[calc(100dvh-12rem)] w-full items-center justify-center">
+      <Empty />
+    </div>
+  );
 }
-
-export default Documentation
