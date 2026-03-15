@@ -22,8 +22,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Row } from "../../_components/Row";
-import { SectionCard } from "../../_components/SectionCard";
+import { Row } from "../../_components/layout/Row";
+import { SectionCard } from "../../_components/layout/SectionCard";
 import { ThemeOption } from '../../../_types/index'
 import { toast } from "react-toastify";
 import {

@@ -148,6 +148,55 @@ translation: {
             },
           },
         },
+        exams: {
+          tabs: {
+            active: "Yakunlanmagan",
+            completed: "Yakunlangan",
+          },
+          card: {
+            labels: {
+              instructor: "O'qituvchi",
+              date: "Sana",
+              duration: "Davomiylik",
+              questions: "Savollar",
+              totalMarks: "Jami ball",
+              deadline: "Muddat",
+              passingScore: "O'tish bali",
+            },
+            units: {
+              minutes: "daq",
+              questions: "ta savol",
+              points: "ball",
+            },
+            status: {
+              available: "Mavjud",
+              upcoming: "Tez orada",
+              completed: "Tugallangan",
+            },
+            actions: {
+              start: "Imtihonni boshlash",
+              review: "Natijalarni ko'rish",
+              details: "Batafsil",
+            },
+          },
+          items: {
+            midterm: {
+              title: "Oraliq nazorat",
+              subject: "Algebra II",
+              instructor: "Dr. Nasiba Karimova",
+            },
+            codeSprint: {
+              title: "Kod sprint sinovi",
+              subject: "Dasturlash asoslari",
+              instructor: "Aziz Umarkhanov",
+            },
+            historyFinal: {
+              title: "Jahon tarixi yakuni",
+              subject: "Tarix",
+              instructor: "Prof. Laylo Saidova",
+            },
+          },
+        },
       },
       sidebar: {
         dashboard: "Boshqaruv paneli",

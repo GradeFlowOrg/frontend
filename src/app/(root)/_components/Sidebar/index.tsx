@@ -28,6 +28,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { examItems } from '../../(pages)/_constants/index'
 
 const COLLAPSED_BUTTON_SIZE = "h-11 w-11 min-h-11 min-w-11 shrink-0 aspect-square";
 const SIDEBAR_BUTTON_PADDING = "p-2.5";
@@ -154,7 +155,7 @@ export default function SideBar() {
 
   const assessmentItems = [
     { href: "/assignments/homework", label: t("sidebar.homework"), count: 0 },
-    { href: "/assignments/exams", label: t("sidebar.exams"), count: 1 },
+    { href: "/assignments/exams", label: t("sidebar.exams"), count: examItems.length },
   ];
 
   const bottomItems: NavItem[] = [

@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react";
 import { Bell, Trash2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import Empty from "../../_components/Empty";
+import Empty from "../../_components/ui/Empty";
 import {
   AlertDialog,
   AlertDialogCancel,

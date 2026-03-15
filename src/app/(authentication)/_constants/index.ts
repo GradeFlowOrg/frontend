@@ -26,4 +26,11 @@ export const testUsers = [
     name: "teacher",
     role: "teacher",
   },
+  {
+    id: "3",
+    identifier: "abdulaziz",
+    password: "abdulaziz123456",
+    name: "abdulaziz",
+    role: "teacher",
+  },
 ];
