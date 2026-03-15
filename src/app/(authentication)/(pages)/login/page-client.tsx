@@ -17,7 +17,7 @@ type LoginPageClientProps = {
   logout?: string;
 };
 
-export default function LoginPageClient({ logout }: LoginPageClientProps) {
+export default function LoginPageClient({ logout }: Readonly<LoginPageClientProps>) {
   const { t } = useTranslation();
   const router = useRouter();
   const logoutToastShownRef = React.useRef(false);

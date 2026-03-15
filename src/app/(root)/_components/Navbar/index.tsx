@@ -5,8 +5,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { Bell } from "lucide-react";
-import Notifications from "./Notifications";
-import Profile from "./Profile";
+import Notifications from "./_components/Notifications";
+import Profile from "./_components/Profile";
 
 import {
   Breadcrumb,
@@ -14,7 +14,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/app/(root)/_components/Navbar/Breadcrumb";
+} from "@/app/(root)/_components/Navbar/_components/Breadcrumb";
 
 const PAGE_KEY_MAP: Record<string, string> = {
   dashboard: "root.pages.dashboard",

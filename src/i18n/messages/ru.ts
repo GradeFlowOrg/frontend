@@ -148,6 +148,55 @@ translation: {
             },
           },
         },
+        exams: {
+          tabs: {
+            active: "Не завершены",
+            completed: "Завершены",
+          },
+          card: {
+            labels: {
+              instructor: "Преподаватель",
+              date: "Дата",
+              duration: "Длительность",
+              questions: "Вопросы",
+              totalMarks: "Всего баллов",
+              deadline: "Дедлайн",
+              passingScore: "Проходной балл",
+            },
+            units: {
+              minutes: "мин",
+              questions: "вопросов",
+              points: "баллов",
+            },
+            status: {
+              available: "Доступен",
+              upcoming: "Скоро",
+              completed: "Завершён",
+            },
+            actions: {
+              start: "Начать экзамен",
+              review: "Посмотреть результаты",
+              details: "Подробнее",
+            },
+          },
+          items: {
+            midterm: {
+              title: "Контрольный рубеж",
+              subject: "Алгебра II",
+              instructor: "Д-р Насиба Каримова",
+            },
+            codeSprint: {
+              title: "Код-спринт",
+              subject: "Основы программирования",
+              instructor: "Азиз Умарханов",
+            },
+            historyFinal: {
+              title: "Итог по мировой истории",
+              subject: "История",
+              instructor: "Проф. Лайло Саидова",
+            },
+          },
+        },
       },
       sidebar: {
         dashboard: "Панель",

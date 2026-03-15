@@ -1,4 +1,4 @@
-import Empty from "../../_components/Empty";
+import Empty from "../../_components/ui/Empty";
 
 export default function Page() {
   return (

@@ -1,5 +1,5 @@
-import RoleEmptyState from "../_components/RoleEmptyState";
-import { getUser } from "../../utils/getUser";
+import RoleEmptyState from "../_components/ui/RoleEmptyState";
+import { getUser } from "../../_utils/getUser";
 
 export default async function Page() {
   const user = await getUser();

@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Inbox } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { notificationItems } from "../../../_constants/index";
+import { notificationItems } from "../../../../_constants/index";
 import Link from "next/link";
 
 type NotificationsProps = {

@@ -148,6 +148,55 @@ translation: {
             },
           },
         },
+        exams: {
+          tabs: {
+            active: "Not completed",
+            completed: "Completed",
+          },
+          card: {
+            labels: {
+              instructor: "Instructor",
+              date: "Date",
+              duration: "Duration",
+              questions: "Questions",
+              totalMarks: "Total marks",
+              deadline: "Deadline",
+              passingScore: "Passing score",
+            },
+            units: {
+              minutes: "min",
+              questions: "questions",
+              points: "pts",
+            },
+            status: {
+              available: "Available",
+              upcoming: "Upcoming",
+              completed: "Completed",
+            },
+            actions: {
+              start: "Start exam",
+              review: "Review results",
+              details: "View details",
+            },
+          },
+          items: {
+            midterm: {
+              title: "Midterm Mastery",
+              subject: "Algebra II",
+              instructor: "Dr. Nasiba Karimova",
+            },
+            codeSprint: {
+              title: "Code Sprint Challenge",
+              subject: "Programming Basics",
+              instructor: "Aziz Umarkhanov",
+            },
+            historyFinal: {
+              title: "World History Final",
+              subject: "History",
+              instructor: "Prof. Laylo Saidova",
+            },
+          },
+        },
       },
       sidebar: {
         dashboard: "Dashboard",

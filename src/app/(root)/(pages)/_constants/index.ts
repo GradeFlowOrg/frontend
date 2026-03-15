@@ -1,4 +1,5 @@
 import { type Variants } from "motion/react";
+import type { ExamItem } from "../_types";
 
 const entryEase = [0.22, 1, 0.36, 1] as const;
 
@@ -21,3 +22,48 @@ export const itemVariants: Variants = {
     transition: { duration: 0.36, ease: entryEase },
   },
 };
+
+export const examItems: ExamItem[] = [
+  {
+    id: "exam-01",
+    title: "root.exams.items.midterm.title",
+    subject: "root.exams.items.midterm.subject",
+    instructor: "root.exams.items.midterm.instructor",
+    date: "March 28, 2026",
+    time: "09:30 AM",
+    deadline: "March 27, 2026 • 11:59 PM",
+    durationMinutes: 75,
+    questions: 42,
+    totalMarks: 100,
+    passingScore: 65,
+    completed: false,
+  },
+  {
+    id: "exam-02",
+    title: "root.exams.items.codeSprint.title",
+    subject: "root.exams.items.codeSprint.subject",
+    instructor: "root.exams.items.codeSprint.instructor",
+    date: "March 20, 2026",
+    time: "02:00 PM",
+    deadline: "March 20, 2026 • 01:30 PM",
+    durationMinutes: 60,
+    questions: 30,
+    totalMarks: 80,
+    passingScore: 60,
+    completed: false,
+  },
+  {
+    id: "exam-03",
+    title: "root.exams.items.historyFinal.title",
+    subject: "root.exams.items.historyFinal.subject",
+    instructor: "root.exams.items.historyFinal.instructor",
+    date: "March 11, 2026",
+    time: "11:00 AM",
+    deadline: "March 10, 2026 • 11:59 PM",
+    durationMinutes: 90,
+    questions: 55,
+    totalMarks: 120,
+    passingScore: 70,
+    completed: true,
+  },
+];
