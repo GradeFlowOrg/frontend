@@ -62,12 +62,26 @@ export default function ExamCard({ exam }: { exam: ExamItem }) {
             </p>
             <p className="mt-1 text-lg font-semibold text-slate-900 dark:text-white">{exam.passingScore}%</p>
           </div>
-          <button
-            type="button"
-            className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0046FF] px-5 text-sm font-semibold text-white transition hover:bg-[#0036d6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0046FF]/60"
-          >
-            {t("root.exams.card.actions.details")}
-          </button>
+          <div className="flex items-center gap-2">
+            {!exam.completed && (
+              <button
+                type="button"
+                className="inline-flex h-11 cursor-pointer items-center justify-center rounded-xl bg-[#0046FF] px-5 text-sm font-semibold text-white transition hover:bg-[#0036d6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0046FF]/60"
+              >
+                {t("root.exams.card.actions.start", "Start")}
+              </button>
+            )}
+            <button
+              type="button"
+              className={`inline-flex h-11 cursor-pointer items-center justify-center rounded-xl px-5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0046FF]/60 ${
+                exam.completed
+                  ? "bg-[#0046FF] text-white hover:bg-[#0036d6]"
+                  : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 dark:border-white/10 dark:bg-white/5 dark:text-slate-100"
+              }`}
+            >
+              {t("root.exams.card.actions.details")}
+            </button>
+          </div>
         </div>
       </div>
     </article>

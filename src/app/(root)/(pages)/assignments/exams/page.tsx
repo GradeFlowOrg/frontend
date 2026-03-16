@@ -26,13 +26,15 @@ export default function Page() {
               key={tab}
               type="button"
               onClick={() => setActiveTab(tab)}
-              className={`inline-flex h-10 items-center justify-center rounded-full border px-4 text-sm font-semibold transition ${
+              className={`inline-flex h-10 cursor-pointer items-center justify-center rounded-full border px-4 text-sm font-semibold transition ${
                 isActive
                   ? "border-[#0046FF] bg-[#0046FF] text-white"
                   : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 dark:border-white/10 dark:bg-white/5 dark:text-slate-200"
               }`}
             >
-              {tab === "active" ? t("root.exams.tabs.active") : t("root.exams.tabs.completed")}
+              {tab === "active"
+                ? t("root.exams.tabs.notStarted", "Not started")
+                : t("root.exams.tabs.finished", "Finished")}
             </button>
           );
         })}
