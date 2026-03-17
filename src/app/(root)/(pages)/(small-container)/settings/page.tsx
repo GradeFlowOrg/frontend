@@ -33,7 +33,7 @@ import {
   containerVariants,
   itemVariants,
 } from '../../_constants/index'
-import { Modal } from '../../_components/ui/Modal/index'
+import { SubmitModal } from '../../_components/ui/SubmitModal/index'
 
 
 
@@ -124,25 +124,19 @@ export default function Settings() {
             icon={KeyRound}
             title={t("root.settings.security.changePassword.title")}
             description={t("root.settings.security.changePassword.description")}
-            action={<button type="button" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.manage")}</button>}
+            action={<Link href="/settings/change-password" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.change")}</Link>}
           />
           <Row
             icon={ShieldEllipsis}
             title={t("root.settings.security.twoFactor.title")}
             description={t("root.settings.security.twoFactor.description")}
-            action={<span className="rounded-full bg-[#eaf1ff] px-3 py-1 text-xs font-semibold text-[#0046FF] dark:bg-[#1b2a4a] dark:text-[#9fb8ff]">{t("root.settings.actions.recommended")}</span>}
+            action={<span className="rounded-full bg-[#eaf1ff] px-3 py-1 text-xs font-semibold text-[#0046FF] dark:bg-[#1b2a4a] dark:text-[#9fb8ff]">{t("root.settings.actions.comingSoon")}</span>}
           />
           <Row
             icon={History}
             title={t("root.settings.security.loginHistory.title")}
             description={t("root.settings.security.loginHistory.description")}
-            action={<button type="button" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.open")}</button>}
-          />
-          <Row
-            icon={BellRing}
-            title={t("root.settings.security.securityAlerts.title")}
-            description={t("root.settings.security.securityAlerts.description")}
-            action={<span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-300">{t("root.settings.actions.enabled")}</span>}
+            action={<Link href="/settings/login-history" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.open")}</Link>}
           />
           <Row
             icon={Trash2}
@@ -164,13 +158,13 @@ export default function Settings() {
             icon={Bug}
             title={t("root.settings.support.reportBug.title")}
             description={t("root.settings.support.reportBug.description")}
-            action={<Modal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" file={true} title="Report a bug">{t("root.settings.actions.send")}</Modal>}
+            action={<SubmitModal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" file={true} title="Report a bug">{t("root.settings.actions.send")}</SubmitModal>}
           />
           <Row
             icon={Palette}
             title={t("root.settings.support.requestFeature.title")}
             description={t("root.settings.support.requestFeature.description")}
-            action={<Modal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" file={false} title="Request a feature">{t("root.settings.actions.share")}</Modal>}
+            action={<SubmitModal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" file={false} title="Request a feature">{t("root.settings.actions.share")}</SubmitModal>}
           />
           <Row
             icon={Mail}

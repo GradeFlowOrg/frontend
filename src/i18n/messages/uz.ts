@@ -25,6 +25,8 @@ translation: {
           actions: {
             manage: "Boshqarish",
             recommended: "Tavsiya etiladi",
+            comingSoon: "Tez orada",
+            change: "O'zgartirish",
             review: "Ko'rish",
             open: "Ochish",
             logout: "Chiqish",

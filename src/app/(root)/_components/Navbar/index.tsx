@@ -91,7 +91,7 @@ const Navbar = ({ userName }: { userName?: string | null }) => {
       <nav className="rounded-none border-b border-black/10 bg-white px-4 py-3 shadow-none dark:border-[#3a3a3a] dark:bg-[#1a1a1a] md:rounded-[28px] md:border md:border-black/10 md:bg-white/85 md:px-5 md:py-4 md:shadow-[0_16px_40px_rgba(15,23,42,0.08)] md:backdrop-blur md:dark:bg-[#1a1a1a]/88 md:dark:shadow-[0_18px_44px_rgba(0,0,0,0.28)]">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="truncate text-lg font-bold text-slate-700 dark:text-white">{pageTitle}</h1>
+            <h1 className="truncate text-lg font-bold text-slate-700 capitalize dark:text-white">{pageTitle}</h1>
 
             <Breadcrumb className="mt-1">
               <BreadcrumbList className="text-slate-500 dark:text-slate-300">

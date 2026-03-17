@@ -25,6 +25,8 @@ translation: {
           actions: {
             manage: "Manage",
             recommended: "Recommended",
+            comingSoon: "Coming soon",
+            change: "Change",
             review: "Review",
             open: "Open",
             logout: "Log out",
