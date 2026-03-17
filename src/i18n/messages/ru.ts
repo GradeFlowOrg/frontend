@@ -56,6 +56,14 @@ translation: {
               montserrat: "Montserrat",
             },
           },
+          language: {
+            title: "Язык",
+            description: "Выберите основной язык для всей панели управления.",
+            primary: {
+              title: "Язык интерфейса",
+              description: "Язык навигации, кнопок и подписей.",
+            },
+          },
           security: {
             title: "Аккаунт и безопасность",
             description: "Настройки аутентификации и защиты аккаунта.",

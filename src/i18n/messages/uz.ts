@@ -56,6 +56,14 @@ translation: {
               montserrat: "Montserrat",
             },
           },
+          language: {
+            title: "Til",
+            description: "Boshqaruv panelining asosiy tilini belgilang.",
+            primary: {
+              title: "Interfeys tili",
+              description: "Navigatsiya, tugma va yozuvlar tili.",
+            },
+          },
           security: {
             title: "Hisob va xavfsizlik",
             description: "Autentifikatsiya va hisob himoyasi sozlamalari.",

@@ -56,6 +56,14 @@ translation: {
               montserrat: "Montserrat",
             },
           },
+          language: {
+            title: "Language",
+            description: "Set the primary language used across the dashboard.",
+            primary: {
+              title: "Interface language",
+              description: "Choose the language for navigation, buttons, and labels.",
+            },
+          },
           security: {
             title: "Account & Security",
             description: "Authentication and account protection settings.",

@@ -8,8 +8,10 @@ import {
   BellRing,
   BookOpenText,
   Bug,
+  Globe,
   History,
   KeyRound,
+  Languages,
   LifeBuoy,
   Mail,
   Monitor,
@@ -26,10 +28,12 @@ import { Row } from "../../_components/layout/Row";
 import { SectionCard } from "../../_components/layout/SectionCard";
 import { ThemeOption } from '../../../_types/index'
 import { toast } from "react-toastify";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {
   containerVariants,
   itemVariants,
 } from '../../_constants/index'
+import { Modal } from '../../_components/ui/Modal/index'
 
 
 
@@ -97,6 +101,21 @@ export default function Settings() {
 
       <motion.div variants={itemVariants}>
         <SectionCard
+          icon={Languages}
+          title={t("root.settings.language.title")}
+          description={t("root.settings.language.description")}
+        >
+          <Row
+            icon={Globe}
+            title={t("root.settings.language.primary.title")}
+            description={t("root.settings.language.primary.description")}
+            action={<LanguageSwitcher compact />}
+          />
+        </SectionCard>
+      </motion.div>
+
+      <motion.div variants={itemVariants}>
+        <SectionCard
           icon={ShieldCheck}
           title={t("root.settings.security.title")}
           description={t("root.settings.security.description")}
@@ -145,13 +164,13 @@ export default function Settings() {
             icon={Bug}
             title={t("root.settings.support.reportBug.title")}
             description={t("root.settings.support.reportBug.description")}
-            action={<button type="button" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.send")}</button>}
+            action={<Modal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" file={true} title="Report a bug">{t("root.settings.actions.send")}</Modal>}
           />
           <Row
             icon={Palette}
             title={t("root.settings.support.requestFeature.title")}
             description={t("root.settings.support.requestFeature.description")}
-            action={<button type="button" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.share")}</button>}
+            action={<Modal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" file={false} title="Request a feature">{t("root.settings.actions.share")}</Modal>}
           />
           <Row
             icon={Mail}
@@ -163,7 +182,7 @@ export default function Settings() {
             icon={BookOpenText}
             title={t("root.settings.support.documentation.title")}
             description={t("root.settings.support.documentation.description")}
-            action={<Link href="/" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.readDocs")}</Link>}
+            action={<Link href="/settings/documentation" className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10">{t("root.settings.actions.readDocs")}</Link>}
           />
         </SectionCard>
       </motion.div>

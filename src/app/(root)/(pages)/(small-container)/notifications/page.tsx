@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { Bell, Trash2 } from "lucide-react";
+import { Bell, Trash2, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import Empty from "../../_components/ui/Empty";
@@ -12,6 +12,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogMedia,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 
@@ -175,7 +176,18 @@ const Page = () => {
         if (!open) setSelectedNotificationId(null);
       }}>
         <AlertDialogContent>
+          <button
+            type="button"
+            onClick={() => setSelectedNotificationId(null)}
+            className="absolute right-4 top-4 inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-transparent text-slate-500 transition hover:bg-slate-100 hover:text-slate-700 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
+            aria-label={t("root.notifications.close")}
+          >
+            <X className="h-4 w-4" />
+          </button>
           <AlertDialogHeader>
+            <AlertDialogMedia className="bg-transparent text-slate-500 dark:text-slate-300">
+              <Bell className="h-5 w-5" />
+            </AlertDialogMedia>
             <AlertDialogTitle>{selectedNotification ? t(selectedNotification.title) : null}</AlertDialogTitle>
             <AlertDialogDescription>
               {selectedNotification ? t(selectedNotification.description) : null}
