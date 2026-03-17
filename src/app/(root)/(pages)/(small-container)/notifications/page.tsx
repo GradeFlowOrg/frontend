@@ -193,9 +193,6 @@ const Page = () => {
               {selectedNotification ? t(selectedNotification.description) : null}
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>{t("root.notifications.close")}</AlertDialogCancel>
-          </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </motion.div>

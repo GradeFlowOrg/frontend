@@ -30,7 +30,7 @@ export default function LanguageSwitcher({ compact = false }: LanguageSwitcherPr
   const currentLanguage = (i18n.resolvedLanguage ?? i18n.language ?? "en") as AppLanguage;
 
   return (
-    <div className={`inline-flex items-center gap-2 ${compact ? "justify-center" : ""}`}>
+    <div className={`inline-flex items-center gap-2  ${compact ? "justify-center" : ""}`}>
       {!compact ? (
         <span className="text-xs font-medium text-slate-600 dark:text-slate-300">{t("language.label")}</span>
       ) : null}
@@ -46,14 +46,14 @@ export default function LanguageSwitcher({ compact = false }: LanguageSwitcherPr
         }}
       >
         <SelectTrigger
-          className={`${compact ? "h-8 w-14 px-2 text-xs" : "h-9 w-20 text-sm"}`}
+          className={`${compact ? "h-8 w-14 px-2 text-xs" : "h-9 w-20 text-sm"} cursor-pointer`}
           aria-label={t("language.label")}
         >
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
           {supportedLanguages.map((language) => (
-            <SelectItem key={language} value={language}>
+            <SelectItem className='cursor-pointer' key={language} value={language}>
               {language.toUpperCase()}
             </SelectItem>
           ))}

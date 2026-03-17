@@ -15,7 +15,7 @@ import { X } from "lucide-react";
 import Textarea from "@/components/ui/textarea";
 import { ModalProps } from "../../../_types/index";
 
-export function Modal({ className, children, title, file }: Readonly<ModalProps>) {
+export function SubmitModal({ className, children, title, file }: Readonly<ModalProps>) {
   const [open, setOpen] = useState(false);
 
   return (
