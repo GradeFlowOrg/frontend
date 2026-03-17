@@ -4,8 +4,10 @@ import { useState } from "react";
 import { KeyRound } from "lucide-react";
 import Input from "@/components/ui/Input.dark";
 import { SectionCard } from "../../../_components/layout/SectionCard";
+import { useTranslation } from "react-i18next";
 
 export default function ChangePassword() {
+  const { t } = useTranslation();
   const [formValues, setFormValues] = useState({
     currentPassword: "",
     newPassword: "",
@@ -16,8 +18,8 @@ export default function ChangePassword() {
     <div className="space-y-5">
       <SectionCard
         icon={KeyRound}
-        title="Change password"
-        description="Update your password to keep your account secure."
+        title={t("root.settings.security.changePassword.page.title")}
+        description={t("root.settings.security.changePassword.page.description")}
       >
         <form
           className="space-y-4"
@@ -30,12 +32,12 @@ export default function ChangePassword() {
               htmlFor="current-password"
               className="text-sm font-semibold text-slate-900 dark:text-white"
             >
-              Current password
+              {t("root.settings.security.changePassword.page.fields.current.label")}
             </label>
             <Input
               id="current-password"
               type="password"
-              placeholder="Enter current password"
+              placeholder={t("root.settings.security.changePassword.page.fields.current.placeholder")}
               value={formValues.currentPassword}
               onChange={(event) =>
                 setFormValues((prev) => ({
@@ -51,12 +53,12 @@ export default function ChangePassword() {
               htmlFor="new-password"
               className="text-sm font-semibold text-slate-900 dark:text-white"
             >
-              New password
+              {t("root.settings.security.changePassword.page.fields.new.label")}
             </label>
             <Input
               id="new-password"
               type="password"
-              placeholder="Create a new password"
+              placeholder={t("root.settings.security.changePassword.page.fields.new.placeholder")}
               value={formValues.newPassword}
               onChange={(event) =>
                 setFormValues((prev) => ({ ...prev, newPassword: event.target.value }))
@@ -69,12 +71,12 @@ export default function ChangePassword() {
               htmlFor="confirm-password"
               className="text-sm font-semibold text-slate-900 dark:text-white"
             >
-              Confirm new password
+              {t("root.settings.security.changePassword.page.fields.confirm.label")}
             </label>
             <Input
               id="confirm-password"
               type="password"
-              placeholder="Re-enter new password"
+              placeholder={t("root.settings.security.changePassword.page.fields.confirm.placeholder")}
               value={formValues.confirmPassword}
               onChange={(event) =>
                 setFormValues((prev) => ({
@@ -86,14 +88,14 @@ export default function ChangePassword() {
           </div>
 
           <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 text-sm text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
-            Use at least 8 characters with a mix of letters, numbers, and symbols.
+            {t("root.settings.security.changePassword.page.hint")}
           </div>
 
           <button
             type="submit"
             className="w-full cursor-pointer rounded-xl bg-[#0046FF] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#0036d6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0046FF]/60 active:scale-[0.99]"
           >
-            Update password
+            {t("root.settings.security.changePassword.page.actions.submit")}
           </button>
         </form>
       </SectionCard>
