@@ -72,6 +72,28 @@ translation: {
             changePassword: {
               title: "Change password",
               description: "Update your sign-in password regularly to keep your account secure.",
+              page: {
+                title: "Change password",
+                description: "Update your password to keep your account secure.",
+                fields: {
+                  current: {
+                    label: "Current password",
+                    placeholder: "Enter current password",
+                  },
+                  new: {
+                    label: "New password",
+                    placeholder: "Create a new password",
+                  },
+                  confirm: {
+                    label: "Confirm new password",
+                    placeholder: "Re-enter new password",
+                  },
+                },
+                hint: "Use at least 8 characters with a mix of letters, numbers, and symbols.",
+                actions: {
+                  submit: "Update password",
+                },
+              },
             },
             twoFactor: {
               title: "Two-Factor Authentication (2FA)",
@@ -120,6 +142,53 @@ translation: {
             documentation: {
               title: "Documentation",
               description: "Open setup notes, guides, and product usage references.",
+            },
+          },
+          documentation: {
+            page: {
+              title: "Documentation",
+              description: "A brief overview of GradeFlow and how it helps teachers and students.",
+              paragraphs: [
+                "GradeFlow is a web platform for creating, delivering, and grading school assessments in one place. Teachers can build quizzes and exams quickly, publish them to students, and review results in real time from any device.",
+                "The dashboard keeps classes, homework, and exams organized with clear status tabs, deadlines, and quick actions. Students can access tests in seconds, submit work online, and receive feedback as soon as grades are released.",
+                "Core features include time-controlled exams, instant grading, reusable question banks, performance insights, and a focused notification center that highlights what needs attention first.",
+                "GradeFlow is designed for speed, clarity, and accessibility. Light and dark themes, responsive layouts, and focused workflows help reduce manual grading effort while keeping both teachers and students aligned.",
+              ],
+            },
+          },
+          loginHistory: {
+            page: {
+              title: "Login history",
+              description: "Recent sign-in activity for your account.",
+              status: {
+                blocked: "Blocked",
+              },
+              items: [
+                {
+                  device: "MacBook Pro 14” • Chrome",
+                  location: "Tashkent, UZ",
+                  time: "Today, 09:42",
+                  status: "Successful",
+                },
+                {
+                  device: "iPhone 13 • Safari",
+                  location: "Tashkent, UZ",
+                  time: "Yesterday, 21:18",
+                  status: "Successful",
+                },
+                {
+                  device: "Windows 11 • Edge",
+                  location: "Samarkand, UZ",
+                  time: "Mar 15, 18:03",
+                  status: "Successful",
+                },
+                {
+                  device: "Unknown device",
+                  location: "Bukhara, UZ",
+                  time: "Mar 12, 07:25",
+                  status: "Blocked",
+                },
+              ],
             },
           },
         },

@@ -72,6 +72,28 @@ translation: {
             changePassword: {
               title: "Parolni almashtirish",
               description: "Hisob xavfsizligi uchun kirish parolingizni muntazam yangilab turing.",
+              page: {
+                title: "Parolni almashtirish",
+                description: "Hisob xavfsizligi uchun parolingizni yangilang.",
+                fields: {
+                  current: {
+                    label: "Joriy parol",
+                    placeholder: "Joriy parolni kiriting",
+                  },
+                  new: {
+                    label: "Yangi parol",
+                    placeholder: "Yangi parol yarating",
+                  },
+                  confirm: {
+                    label: "Yangi parolni tasdiqlash",
+                    placeholder: "Yangi parolni qayta kiriting",
+                  },
+                },
+                hint: "Kamida 8 ta belgi: harflar, raqamlar va maxsus belgilar.",
+                actions: {
+                  submit: "Parolni yangilash",
+                },
+              },
             },
             twoFactor: {
               title: "Ikki bosqichli tasdiqlash (2FA)",
@@ -120,6 +142,53 @@ translation: {
             documentation: {
               title: "Hujjatlar",
               description: "Qo'llanmalar, yo'riqnomalar va mahsulotdan foydalanish materiallarini oching.",
+            },
+          },
+          documentation: {
+            page: {
+              title: "Hujjatlar",
+              description: "GradeFlow haqida qisqa ma'lumot va uning foydasi.",
+              paragraphs: [
+                "GradeFlow — maktab baholashlarini yaratish, o‘tkazish va tekshirish uchun yagona platforma. O‘qituvchilar test va imtihonlarni tez tuzadi, ularni o‘quvchilarga yuboradi va natijalarni real vaqtda ko‘radi.",
+                "Boshqaruv paneli sinflar, uy vazifalari va imtihonlarni aniq statuslar, muddatlar va tezkor amallar bilan tartiblaydi. O‘quvchilar testlarga tez kiradi, topshiriqlarni onlayn topshiradi va baholar e’lon qilingach darhol fikr-mulohaza oladi.",
+                "Asosiy imkoniyatlar: vaqt bilan boshqariladigan imtihonlar, tezkor baholash, qayta ishlatiladigan savollar banki, natijalar tahlili va muhim xabarlarni ajratib ko‘rsatadigan bildirishnomalar markazi.",
+                "GradeFlow tezlik, aniqlik va qulaylik uchun yaratilgan. Yorug‘ va qorong‘i mavzular, moslashuvchan dizayn va aniq ish jarayonlari qo‘lda tekshirish ishini kamaytiradi va o‘qituvchi hamda o‘quvchini bir yo‘nalishda ushlab turadi.",
+              ],
+            },
+          },
+          loginHistory: {
+            page: {
+              title: "Kirish tarixi",
+              description: "Hisobingiz bo'yicha so'nggi kirishlar.",
+              status: {
+                blocked: "Bloklangan",
+              },
+              items: [
+                {
+                  device: "MacBook Pro 14” • Chrome",
+                  location: "Toshkent, UZ",
+                  time: "Bugun, 09:42",
+                  status: "Muvaffaqiyatli",
+                },
+                {
+                  device: "iPhone 13 • Safari",
+                  location: "Toshkent, UZ",
+                  time: "Kecha, 21:18",
+                  status: "Muvaffaqiyatli",
+                },
+                {
+                  device: "Windows 11 • Edge",
+                  location: "Samarqand, UZ",
+                  time: "15-mart, 18:03",
+                  status: "Muvaffaqiyatli",
+                },
+                {
+                  device: "Noma'lum qurilma",
+                  location: "Buxoro, UZ",
+                  time: "12-mart, 07:25",
+                  status: "Bloklangan",
+                },
+              ],
             },
           },
         },
