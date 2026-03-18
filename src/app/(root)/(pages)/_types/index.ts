@@ -12,10 +12,3 @@ export interface ExamItem {
   passingScore: number;
   completed: boolean;
 }
-
-export interface ModalProps {
-  className: string;
-  children: React.ReactNode;
-  title: string;
-  file: boolean;
-}
