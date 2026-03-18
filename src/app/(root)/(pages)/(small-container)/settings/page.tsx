@@ -5,7 +5,6 @@ import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { motion } from "motion/react";
 import {
-  BellRing,
   BookOpenText,
   Bug,
   Globe,
@@ -158,13 +157,13 @@ export default function Settings() {
             icon={Bug}
             title={t("root.settings.support.reportBug.title")}
             description={t("root.settings.support.reportBug.description")}
-            action={<SubmitModal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" file={true} title="Report a bug">{t("root.settings.actions.send")}</SubmitModal>}
+            action={<SubmitModal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" title="Report a bug">{t("root.settings.actions.send")}</SubmitModal>}
           />
           <Row
             icon={Palette}
             title={t("root.settings.support.requestFeature.title")}
             description={t("root.settings.support.requestFeature.description")}
-            action={<SubmitModal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" file={false} title="Request a feature">{t("root.settings.actions.share")}</SubmitModal>}
+            action={<SubmitModal className="cursor-pointer rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10" title="Request a feature">{t("root.settings.actions.share")}</SubmitModal>}
           />
           <Row
             icon={Mail}
