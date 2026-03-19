@@ -202,6 +202,60 @@ translation: {
           homework: "Домашние задания",
           exams: "Экзамены",
         },
+        profile: {
+          page: {
+            title: "Профиль",
+            description: "Обновите личные данные и параметры профиля.",
+            summary: {
+              name: "Айша Каримова",
+              role: "Учитель • Алгебра II",
+              verified: "Подтверждённый преподаватель",
+            },
+            fields: {
+              fullName: {
+                label: "Полное имя",
+                placeholder: "Введите полное имя",
+              },
+              username: {
+                label: "Имя пользователя",
+                placeholder: "@username",
+              },
+              email: {
+                label: "Email",
+                placeholder: "you@school.edu",
+              },
+              phone: {
+                label: "Телефон",
+                placeholder: "+998 90 123 45 67",
+              },
+              school: {
+                label: "Школа",
+                placeholder: "GradeFlow Academy",
+              },
+              location: {
+                label: "Локация",
+                placeholder: "Ташкент, UZ",
+              },
+              bio: {
+                label: "Короткое описание",
+                placeholder: "Коротко расскажите о себе для учеников и команды.",
+              },
+            },
+            meta: {
+              email: "Основной email используется для восстановления и уведомлений.",
+              phone: "Телефон необязателен и виден только администраторам.",
+              school: "Название школы отображается в отчётах и списках классов.",
+              location: "Локация помогает корректно настраивать сроки и расписание.",
+              userId: "ID пользователя: {{id}}",
+              role: "Роль: {{role}}",
+            },
+            actions: {
+              save: "Сохранить изменения",
+              edit: "Редактировать",
+              cancel: "Отмена",
+            },
+          },
+        },
         notifications: {
           emptyTitle: "Уведомлений нет",
           emptyDescription: "Здесь будут появляться последние обновления.",

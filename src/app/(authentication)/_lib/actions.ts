@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createSession, deleteSession } from "./session";
-import { loginSchema } from "@/app/(authentication)/_schemas";
+import { loginSchema } from "@/app/(authentication)/_types/_schemas";
 import { testUsers } from '@/app/(authentication)/_constants/index'
  
 export type LoginActionState = {
