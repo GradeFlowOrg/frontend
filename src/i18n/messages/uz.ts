@@ -202,6 +202,60 @@ translation: {
           homework: "Uy vazifalari",
           exams: "Imtihonlar",
         },
+        profile: {
+          page: {
+            title: "Profil",
+            description: "Shaxsiy ma'lumotlar va profil sozlamalarini yangilang.",
+            summary: {
+              name: "Oysha Karimova",
+              role: "O‘qituvchi • Algebra II",
+              verified: "Tasdiqlangan o‘qituvchi",
+            },
+            fields: {
+              fullName: {
+                label: "To‘liq ism",
+                placeholder: "To‘liq ismingizni kiriting",
+              },
+              username: {
+                label: "Foydalanuvchi nomi",
+                placeholder: "@username",
+              },
+              email: {
+                label: "Email",
+                placeholder: "you@school.edu",
+              },
+              phone: {
+                label: "Telefon",
+                placeholder: "+998 90 123 45 67",
+              },
+              school: {
+                label: "Maktab",
+                placeholder: "GradeFlow Academy",
+              },
+              location: {
+                label: "Manzil",
+                placeholder: "Toshkent, UZ",
+              },
+              bio: {
+                label: "Qisqa bio",
+                placeholder: "O‘quvchilar va jamoa uchun qisqa ma’lumot yozing.",
+              },
+            },
+            meta: {
+              email: "Asosiy email tiklash va bildirishnomalar uchun ishlatiladi.",
+              phone: "Telefon majburiy emas va faqat administratorlarga ko‘rinadi.",
+              school: "Maktab nomi hisobot va sinf ro‘yxatlarida ko‘rinadi.",
+              location: "Manzil muddatlar va jadvalni moslashtirishga yordam beradi.",
+              userId: "Foydalanuvchi ID: {{id}}",
+              role: "Rol: {{role}}",
+            },
+            actions: {
+              save: "O‘zgarishlarni saqlash",
+              edit: "Tahrirlash",
+              cancel: "Bekor qilish",
+            },
+          },
+        },
         notifications: {
           emptyTitle: "Bildirishnomalar yo'q",
           emptyDescription: "So'nggi yangilanishlar shu yerda ko'rinadi.",

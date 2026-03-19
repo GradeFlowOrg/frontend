@@ -11,11 +11,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 export type LanguageSwitcherProps = {
   compact?: boolean;
+  triggerClassName?: string;
+  contentClassName?: string;
+  itemClassName?: string;
 };
-export default function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({
+  compact = false,
+  triggerClassName,
+  contentClassName,
+  itemClassName,
+}: LanguageSwitcherProps) {
   const { i18n, t } = useTranslation();
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -45,15 +54,30 @@ export default function LanguageSwitcher({ compact = false }: LanguageSwitcherPr
           void i18n.changeLanguage(value);
         }}
       >
-        <SelectTrigger
-          className={`${compact ? "h-8 w-14 px-2 text-xs" : "h-9 w-20 text-sm"} cursor-pointer`}
+      <SelectTrigger
+          className={cn(
+            `${compact ? "h-8 w-14 px-2 text-xs" : "h-9 w-20 text-sm"} cursor-pointer`,
+            triggerClassName
+          )}
           aria-label={t("language.label")}
         >
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          className={cn(
+            "border-slate-200/80 bg-white text-slate-700 dark:border-white/10 dark:bg-[#111827] dark:text-slate-100",
+            contentClassName
+          )}
+        >
           {supportedLanguages.map((language) => (
-            <SelectItem className='cursor-pointer' key={language} value={language}>
+            <SelectItem
+              className={cn(
+                "cursor-pointer data-[highlighted]:bg-slate-100 data-[highlighted]:text-slate-900 dark:data-[highlighted]:bg-white/10 dark:data-[highlighted]:text-white",
+                itemClassName
+              )}
+              key={language}
+              value={language}
+            >
               {language.toUpperCase()}
             </SelectItem>
           ))}

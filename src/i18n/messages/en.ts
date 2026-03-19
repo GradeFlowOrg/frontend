@@ -202,6 +202,60 @@ translation: {
           homework: "Homework",
           exams: "Exams",
         },
+        profile: {
+          page: {
+            title: "Profile",
+            description: "Update your personal details and profile preferences.",
+            summary: {
+              name: "Aisha Karimova",
+              role: "Teacher • Algebra II",
+              verified: "Verified educator",
+            },
+            fields: {
+              fullName: {
+                label: "Full name",
+                placeholder: "Enter your full name",
+              },
+              username: {
+                label: "Username",
+                placeholder: "@username",
+              },
+              email: {
+                label: "Email address",
+                placeholder: "you@school.edu",
+              },
+              phone: {
+                label: "Phone",
+                placeholder: "+998 90 123 45 67",
+              },
+              school: {
+                label: "School",
+                placeholder: "GradeFlow Academy",
+              },
+              location: {
+                label: "Location",
+                placeholder: "Tashkent, UZ",
+              },
+              bio: {
+                label: "Short bio",
+                placeholder: "Share a short bio for students and staff.",
+              },
+            },
+            meta: {
+              email: "Primary email is used for account recovery and notifications.",
+              phone: "Phone number is optional and visible only to admins.",
+              school: "School name appears on reports and class listings.",
+              location: "Location helps personalize deadlines and schedules.",
+              userId: "User ID: {{id}}",
+              role: "Role: {{role}}",
+            },
+            actions: {
+              save: "Save changes",
+              edit: "Edit",
+              cancel: "Cancel",
+            },
+          },
+        },
         notifications: {
           emptyTitle: "No notifications",
           emptyDescription: "Recent updates will appear here.",
