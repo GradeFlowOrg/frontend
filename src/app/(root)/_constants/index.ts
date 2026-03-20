@@ -9,6 +9,7 @@ export const notificationItems: notificationItemsInterface[] = [
     unread: true,
   },
   {
+    
     id: 2,
     title: "root.notifications.items.serverAlert.title",
     description: "root.notifications.items.serverAlert.description",
