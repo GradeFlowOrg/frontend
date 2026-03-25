@@ -14,6 +14,7 @@ type ProfileClientProps = {
   user: ProfileUser | null;
 };
 
+
 export default function ProfileClient({ user }: Readonly<ProfileClientProps>) {
 
   if (!user) {
