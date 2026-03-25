@@ -14,6 +14,7 @@ type ProfileClientProps = {
   user: ProfileUser | null;
 };
 
+
 export default function ProfileClient({ user }: Readonly<ProfileClientProps>) {
 
   if (!user) {
@@ -24,6 +25,7 @@ export default function ProfileClient({ user }: Readonly<ProfileClientProps>) {
     );
   }
 
+  
   return (
     <>
       {/* <div className="w-full">
