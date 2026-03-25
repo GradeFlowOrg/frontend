@@ -25,6 +25,7 @@ export default function ProfileClient({ user }: Readonly<ProfileClientProps>) {
     );
   }
 
+  
   return (
     <>
       {/* <div className="w-full">
