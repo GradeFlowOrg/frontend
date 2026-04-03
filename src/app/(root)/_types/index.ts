@@ -14,4 +14,9 @@ export type NavItem = {
   icon: LucideIcon;
 };
 
+export type Items = {
+  item: string;
+  number: number;
+}
+
 export type ThemeOption = "light" | "dark" | "system";
